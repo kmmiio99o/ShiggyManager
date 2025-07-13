@@ -250,4 +250,6 @@
   <string name="downloading_base_apk">Downloading base APK</string>
   <string name="downloading_libs_apk">Downloading libs apk</string>
   <string name="downloading_resources_apk">Downloading resources apk</string>
+  <string name="injecting_wintryxposed_with_lspatch">Injecting WintryXposed with LSPatch</string>
+  <string name="downloading_wintryxposed">Downloading WintryXposed</string>
 </resources>

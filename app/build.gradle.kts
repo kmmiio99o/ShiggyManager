@@ -22,7 +22,7 @@ android {
     compileSdk = 36
 
     defaultConfig {
-        minSdk = 24
+        minSdk = 28
         targetSdk = 36
         versionCode = 10_00_02
         versionName = "1.0.2"
@@ -169,6 +169,8 @@ dependencies {
     implementation(libs.bundles.ktor)
     implementation(libs.bundles.voyager)
 
+    implementation(files("libs/lspatch.aar"))
+
     implementation(libs.compose.ui.tooling.preview)
     debugImplementation(libs.compose.ui.tooling)
     debugImplementation(libs.compose.runtime.tracing)
@@ -189,6 +191,28 @@ dependencies {
     implementation(libs.zip)
 
     coreLibraryDesugaring(libs.desugaring)
+}
+
+configurations.all {
+    // ---- Previous Exclusions ----
+    exclude(group = "org.bouncycastle")
+    exclude(group = "org.checkerframework", module = "checker-qual")
+    exclude(group = "com.aliucord", module = "axml")
+
+    // ---- New Exclusions ----
+    // Exclude apksig, as it's bundled in LSPatch
+    exclude(group = "com.android.tools.build", module = "apksig")
+
+    // Exclude jcommander
+    exclude(group = "com.beust", module = "jcommander")
+
+    // Exclude Google Guava and its related modules
+    exclude(group = "com.google.guava")
+
+    // Exclude other common utility/annotation libraries
+    exclude(group = "com.google.errorprone", module = "error_prone_annotations")
+    exclude(group = "com.google.j2objc", module = "j2objc-annotations")
+    exclude(group = "com.google.code.findbugs", module = "jsr305")
 }
 
 fun ProviderFactory.execIgnoreCode(vararg command: String): String = run {

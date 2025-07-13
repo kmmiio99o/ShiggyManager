@@ -72,9 +72,10 @@ class CopyDependenciesStep : Step(), KoinComponent {
             }
         }
 
-        fun copyApkSafely(src: File?, destFile: File, onCopied: (File) -> Unit) {
+        fun copyApkSafely(src: File?, part: String, onCopied: (File) -> Unit) {
             src?.let {
-                container.log("Copying patched apk from ${it.absolutePath} to ${destFile.absolutePath}")
+                container.log("Copying patched apk from ${it.absolutePath} to $part")
+                val destFile = File(dir, paths.patchedApk(part).name)
                 it.copyTo(destFile)
                 onCopied(destFile)
             }
@@ -85,8 +86,8 @@ class CopyDependenciesStep : Step(), KoinComponent {
         srcApk.copyTo(patchedApk)
 
         // Optional APKs
-        copyApkSafely(langApk, File(dir, "lang")) { patchedLangApk = it }
-        copyApkSafely(libApk, File(dir, "lib")) { patchedLibApk = it }
-        copyApkSafely(resApk, File(dir, "res")) { patchedResApk = it }
+        copyApkSafely(langApk, "lang") { patchedLangApk = it }
+        copyApkSafely(libApk, "lib") { patchedLibApk = it }
+        copyApkSafely(resApk, "res") { patchedResApk = it }
     }
 }

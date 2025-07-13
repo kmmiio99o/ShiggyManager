@@ -13,36 +13,32 @@ import com.github.diamondminer88.zip.ZipWriter
 /**
  * Patch the APK's AndroidManifest.xml
  */
-class PatchManifestStep(private val options: PatchOptions) : Step() {
+open class PatchManifestStep(private val options: PatchOptions) : Step() {
     override val group = StepGroup.Patch
     override val localizedName = R.string.patch_step_patch_manifests
 
+    protected open fun patchManifest(manifestBytes: ByteArray, isBase: Boolean) = ManifestPatcher.patchManifest(
+        manifestBytes = manifestBytes,
+        packageName = options.packageName,
+        appName = options.appName,
+        debuggable = options.debuggable,
+    )
+
     override suspend fun execute(container: StepRunner) {
-        val deps = container.getStep<CopyDependenciesStep>()
-        for (apk in deps.patchedApks) {
+        val dependenciesStep = container.getStep<CopyDependenciesStep>()
+        for (apk in dependenciesStep.patchedApks) {
             container.log("Reading manifest from apk")
-            val manifest = ZipReader(apk)
+            val manifestBytes = ZipReader(apk)
                 .use { zip -> zip.openEntry("AndroidManifest.xml")?.read() }
                 ?: throw IllegalArgumentException("No manifest found in APK")
 
             container.log("Patching manifest")
-            val patchedManifest = if (apk == deps.patchedApk)
-                ManifestPatcher.patchManifest(
-                    manifestBytes = manifest,
-                    packageName = options.packageName,
-                    appName = options.appName,
-                    debuggable = options.debuggable,
-                )
-            else {
-                ManifestPatcher.patchManifestPackageName(
-                    manifestBytes = manifest,
-                    packageName = options.packageName,
-                )
-            }
+            val isBase = apk == dependenciesStep.patchedApk
+            val patchedManifest = patchManifest(manifestBytes, isBase)
 
             container.log("Writing patched manifest to apk unaligned compressed")
             ZipWriter(apk, /* append = */ true).use {
-                it.deleteEntry("AndroidManifest.xml", apk == deps.patchedLibApk || apk == deps.patchedApk)
+                it.deleteEntry("AndroidManifest.xml", apk == dependenciesStep.patchedLibApk || apk == dependenciesStep.patchedApk)
                 it.writeEntry("AndroidManifest.xml", patchedManifest)
             }
         }
