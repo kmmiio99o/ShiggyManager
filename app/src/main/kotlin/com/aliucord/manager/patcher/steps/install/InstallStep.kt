@@ -26,7 +26,7 @@ private const val READY_NOTIF_ID = 200001
 /**
  * Install the final APK with the system's PackageManager.
  */
-class InstallStep(private val options: PatchOptions) : Step(), KoinComponent {
+open class InstallStep(private val options: PatchOptions) : Step(), KoinComponent {
     private val context: Context by inject()
     private val installers: InstallerManager by inject()
     private val prefs: PreferencesManager by inject()
@@ -36,7 +36,7 @@ class InstallStep(private val options: PatchOptions) : Step(), KoinComponent {
     override val localizedName = R.string.patch_step_install
 
     override suspend fun execute(container: StepRunner) {
-        val apk = container.getStep<CopyDependenciesStep>().patchedApk
+        val apks = container.getStep<CopyDependenciesStep>().patchedApks
 
         // If app backgrounded, show notification
         if (ProcessLifecycleOwner.get().lifecycle.currentState == Lifecycle.State.CREATED) {
@@ -66,9 +66,9 @@ class InstallStep(private val options: PatchOptions) : Step(), KoinComponent {
             prefs.showPlayProtectWarning = !neverShowAgain
         }
 
-        container.log("Installing ${apk.absolutePath}, silent: ${!prefs.devMode}")
+        container.log("Installing ${apks.joinToString(", ") { it.name }}, silent: ${!prefs.devMode}")
         val result = installers.getActiveInstaller().waitInstall(
-            apks = listOf(apk),
+            apks = apks,
             silent = !prefs.devMode,
         )
 

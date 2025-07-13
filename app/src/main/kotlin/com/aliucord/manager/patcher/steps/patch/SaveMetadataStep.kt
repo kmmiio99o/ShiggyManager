@@ -27,17 +27,17 @@ class SaveMetadataStep(private val options: PatchOptions) : Step(), KoinComponen
 
     override suspend fun execute(container: StepRunner) {
         val apk = container.getStep<CopyDependenciesStep>().patchedApk
-        val aliuhook = container.getStep<DownloadAliuhookStep>()
-        val injector = container.getStep<DownloadInjectorStep>()
-        val patches = container.getStep<DownloadPatchesStep>()
+        val aliuhook = container.getStepOrNull<DownloadAliuhookStep>()
+        val injector = container.getStepOrNull<DownloadInjectorStep>()
+        val patches = container.getStepOrNull<DownloadPatchesStep>()
 
         val metadata = InstallMetadata(
             options = options,
             customManager = !BuildConfig.RELEASE,
             managerVersion = SemVer.parse(BuildConfig.VERSION_NAME),
-            aliuhookVersion = aliuhook.targetVersion,
-            injectorVersion = injector.targetVersion,
-            patchesVersion = patches.targetVersion,
+            aliuhookVersion = aliuhook?.targetVersion,
+            injectorVersion = injector?.targetVersion,
+            patchesVersion = patches?.targetVersion,
         )
 
         container.log("Writing serialized install metadata to APK")

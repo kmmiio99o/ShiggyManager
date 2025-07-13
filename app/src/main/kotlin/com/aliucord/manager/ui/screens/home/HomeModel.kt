@@ -250,9 +250,11 @@ class HomeModel(
             return false
         }
 
-        // Check that all the installation components are up-to-date
-        return remoteBuildData.injectorVersion == installMetadata.injectorVersion
-            && remoteBuildData.patchesVersion == installMetadata.patchesVersion
-            && latestAliuhookVersion == installMetadata.aliuhookVersion
+        // Check that all the installation components are up-to-date (skip not installed)
+        val injectorUpToDate = installMetadata.injectorVersion == null || remoteBuildData.injectorVersion == installMetadata.injectorVersion
+        val patchesUpToDate = installMetadata.patchesVersion == null || remoteBuildData.patchesVersion == installMetadata.patchesVersion
+        val aliuhookUpToDate = installMetadata.aliuhookVersion == null || latestAliuhookVersion == installMetadata.aliuhookVersion
+
+        return injectorUpToDate && patchesUpToDate && aliuhookUpToDate
     }
 }

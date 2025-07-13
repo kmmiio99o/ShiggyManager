@@ -23,15 +23,30 @@ class CopyDependenciesStep : Step(), KoinComponent {
     private val application: Application by inject()
 
     /**
-     * The target APK file which can be modified during patching
+     * The target APK files which can be modified during patching
      */
     val patchedApk: File = paths.patchedApk()
+    var patchedLangApk: File? = null
+    var patchedLibApk: File? = null
+    var patchedResApk: File? = null
+
+    val patchedApks
+        get() = listOfNotNull(
+            patchedApk,
+            patchedLangApk.takeIf { it?.exists() == true },
+            patchedLibApk.takeIf { it?.exists() == true },
+            patchedResApk.takeIf { it?.exists() == true }
+        )
 
     override val group = StepGroup.Download
     override val localizedName = R.string.patch_step_copy_deps
 
     override suspend fun execute(container: StepRunner) {
         val srcApk = container.getStep<DownloadDiscordStep>().targetFile
+        val langApk = container.getStepOrNull<DownloadDiscordRNALangStep>()?.targetFile
+        val libApk = container.getStepOrNull<DownloadDiscordRNALibStep>()?.targetFile
+        val resApk = container.getStepOrNull<DownloadDiscordRNAResourcesStep>()?.targetFile
+
         val dir = paths.patchingWorkingDir()
 
         container.log("Clearing patched directory")
@@ -42,7 +57,7 @@ class CopyDependenciesStep : Step(), KoinComponent {
         if (Build.VERSION.SDK_INT >= 26) {
             val storageManager = application.getSystemService<StorageManager>()!!
             val targetFileStorageId = storageManager.getUuidForPath(patchedApk)
-            val fileSize = srcApk.length()
+            val fileSize = srcApk.length() + (langApk?.length() ?: 0) + (libApk?.length() ?: 0) + (resApk?.length() ?: 0)
 
             // We request 3.5x the size of the APK, to give space for the following:
             // 1) A copy of the APK
@@ -57,7 +72,21 @@ class CopyDependenciesStep : Step(), KoinComponent {
             }
         }
 
-        container.log("Copying patched apk from ${srcApk.absolutePath} to ${patchedApk.absolutePath}")
+        fun copyApkSafely(src: File?, destFile: File, onCopied: (File) -> Unit) {
+            src?.let {
+                container.log("Copying patched apk from ${it.absolutePath} to ${destFile.absolutePath}")
+                it.copyTo(destFile)
+                onCopied(destFile)
+            }
+        }
+
+        // Base APK
+        container.log("Copying patched base apk from ${srcApk.absolutePath} to ${patchedApk.absolutePath}")
         srcApk.copyTo(patchedApk)
+
+        // Optional APKs
+        copyApkSafely(langApk, File(dir, "lang")) { patchedLangApk = it }
+        copyApkSafely(libApk, File(dir, "lib")) { patchedLibApk = it }
+        copyApkSafely(resApk, File(dir, "res")) { patchedResApk = it }
     }
 }

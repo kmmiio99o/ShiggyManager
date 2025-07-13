@@ -12,8 +12,7 @@ import com.aliucord.manager.BuildConfig
 import com.aliucord.manager.ui.screens.patchopts.PatchOptions
 import com.aliucord.manager.util.IS_PROBABLY_EMULATOR
 import com.aliucord.manager.util.isPlayProtectEnabled
-import kotlinx.serialization.ExperimentalSerializationApi
-import kotlinx.serialization.Serializable
+import kotlinx.serialization.*
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.decodeFromStream
 import java.io.IOException
@@ -149,7 +148,7 @@ class InstallLogManager(
 @Serializable
 data class InstallLogData(
     val id: String,
-    val installDate: Instant,
+    @Contextual val installDate: Instant,
     val installDuration: Duration,
     val installOptions: PatchOptions,
     val environmentInfo: String,

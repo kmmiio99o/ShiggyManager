@@ -245,4 +245,9 @@
   <string name="fun_fact_10">Aliucord uses the *real* old UI, from mid-2022!</string>
   <string name="fun_fact_11">There was an attempt to make Aliucord run on iOS…</string>
   <string name="fun_fact_12" translatable="false">veeeee 😭</string>
+
+  <string name="download_libs_apk">Download libs apk</string>
+  <string name="downloading_base_apk">Downloading base APK</string>
+  <string name="downloading_libs_apk">Downloading libs apk</string>
+  <string name="downloading_resources_apk">Downloading resources apk</string>
 </resources>

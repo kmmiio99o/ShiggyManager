@@ -125,7 +125,7 @@ class PathManager(
     /**
      * The APK that is worked on during the patching process.
      */
-    fun patchedApk() = patchingWorkingDir().resolve("patched.apk")
+    fun patchedApk(part: String = "") = patchingWorkingDir().resolve("patched-${part}.apk")
 
     private companion object {
         /**

@@ -13,8 +13,8 @@ import org.koin.core.component.inject
  * from a redirect to an APK mirror site provided by the Aliucord backend.
  */
 @Stable
-class DownloadDiscordStep : DownloadStep(), KoinComponent {
-    private val paths: PathManager by inject()
+open class DownloadDiscordStep : DownloadStep(), KoinComponent {
+    protected val paths: PathManager by inject()
 
     override val localizedName = R.string.patch_step_dl_kt_apk
     override val targetUrl = getDiscordApkUrl(DISCORD_KT_VERSION)

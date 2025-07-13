@@ -16,9 +16,9 @@ class SigningStep : Step(), KoinComponent {
     override val localizedName = R.string.patch_step_signing
 
     override suspend fun execute(container: StepRunner) {
-        val apk = container.getStep<CopyDependenciesStep>().patchedApk
-
-        container.log("Signing apk at ${apk.absolutePath}")
-        Signer.signApk(apk)
+        for (apk in container.getStep<CopyDependenciesStep>().patchedApks) {
+            container.log("Signing apk at ${apk.absolutePath}")
+            Signer.signApk(apk)
+        }
     }
 }

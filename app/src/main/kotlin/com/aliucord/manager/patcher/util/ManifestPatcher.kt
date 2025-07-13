@@ -191,6 +191,72 @@ object ManifestPatcher {
         return writer.toByteArray()
     }
 
+    fun patchManifestPackageName(
+        manifestBytes: ByteArray,
+        packageName: String,
+    ): ByteArray {
+        val reader = AxmlReader(manifestBytes)
+        val writer = AxmlWriter()
+
+        reader.accept(object : AxmlVisitor(writer) {
+            override fun ns(prefix: String?, uri: String?, ln: Int) {
+                val realUri = uri ?: ANDROID_NAMESPACE
+                super.ns(prefix, realUri, ln)
+            }
+
+            override fun child(ns: String?, name: String?) =
+                object : ReplaceAttrsVisitor(
+                    super.child(ns, name),
+                    mapOf(PACKAGE to packageName)
+                ) {
+                    override fun child(ns: String?, name: String): NodeVisitor {
+                        val nv = super.child(ns, name)
+
+                        return when (name) {
+                            "permission" -> object : NodeVisitor(nv) {
+                                override fun attr(ns: String?, name: String, resourceId: Int, type: Int, value: Any?) {
+                                    super.attr(
+                                        ns, name, resourceId, type,
+                                        if (name == "name") {
+                                            (value as String).replace("com.discord", packageName)
+                                        } else {
+                                            value
+                                        }
+                                    )
+                                }
+                            }
+
+                            "application" -> object : NodeVisitor(nv) {
+                                override fun child(ns: String?, name: String): NodeVisitor {
+                                    val visitor = super.child(ns, name)
+                                    return when (name) {
+                                        "provider" -> object : NodeVisitor(visitor) {
+                                            override fun attr(ns: String?, name: String, resourceId: Int, type: Int, value: Any?) {
+                                                super.attr(
+                                                    ns, name, resourceId, type,
+                                                    if (name == "authorities") {
+                                                        (value as String).replace("com.discord", packageName)
+                                                    } else {
+                                                        value
+                                                    }
+                                                )
+                                            }
+                                        }
+
+                                        else -> visitor
+                                    }
+                                }
+                            }
+
+                            else -> nv
+                        }
+                    }
+                }
+        })
+
+        return writer.toByteArray()
+    }
+
     private open class ReplaceAttrsVisitor(
         nv: NodeVisitor,
         private val attrs: Map<String, Any>,

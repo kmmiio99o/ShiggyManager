@@ -42,16 +42,20 @@ abstract class StepRunner : KoinComponent {
      * @param completed Only match steps that have finished executing.
      */
     inline fun <reified T : Step> getStep(completed: Boolean = true): T {
-        val step = steps.asSequence()
-            .filterIsInstance<T>()
-            .filter { !completed || it.state.isFinished }
-            .firstOrNull()
+        val step = getStepOrNull<T>(completed)
 
         if (step == null) {
             throw IllegalArgumentException("No completed step ${T::class.simpleName} exists in container")
         }
 
         return step
+    }
+
+    inline fun <reified T : Step> getStepOrNull(completed: Boolean = true): T? {
+        return steps.asSequence()
+            .filterIsInstance<T>()
+            .filter { !completed || it.state.isFinished }
+            .firstOrNull()
     }
 
     /**
