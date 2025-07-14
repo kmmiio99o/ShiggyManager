@@ -36,11 +36,11 @@ class AndroidDownloadManager(application: Application) : IDownloadManager {
 
         // Create and start a download in the system DownloadManager
         val downloadId = DownloadManager.Request(url.toUri())
-            .setTitle("Aliucord Manager")
+            .setTitle(BuildConfig.APPLICATION_NAME)
             .setDescription("Downloading ${out.name}...")
             .setDestinationUri(Uri.fromFile(out))
             .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE)
-            .addRequestHeader("User-Agent", "Aliucord Manager/${BuildConfig.VERSION_NAME}")
+            .addRequestHeader("User-Agent", "${BuildConfig.APPLICATION_NAME}/${BuildConfig.VERSION_NAME}")
             .let(downloadManager::enqueue)
 
         // Repeatedly request download state until it is finished

@@ -74,10 +74,16 @@ class IconOptionsModel(
     // ---------- Other ---------- //
     init {
         when (prefilledOptions) {
+            is IconReplacement.CustomColor if prefilledOptions.color == IconReplacement.WintryColor -> {
+                changeMode(IconOptionsMode.Wintry)
+                initSelectedColor(IconReplacement.WintryColor)
+            }
+
             is IconReplacement.CustomColor if prefilledOptions.color == IconReplacement.AliucordColor -> {
                 changeMode(IconOptionsMode.Aliucord)
                 initSelectedColor(IconReplacement.AliucordColor)
             }
+
 
             is IconReplacement.CustomColor -> {
                 changeMode(IconOptionsMode.CustomColor)
@@ -98,6 +104,7 @@ class IconOptionsModel(
         return when (mode) {
             IconOptionsMode.Original -> IconReplacement.Original
             IconOptionsMode.OldDiscord -> IconReplacement.OldDiscord
+            IconOptionsMode.Wintry -> IconReplacement.CustomColor(IconReplacement.WintryColor)
             IconOptionsMode.Aliucord -> IconReplacement.CustomColor(IconReplacement.AliucordColor)
             IconOptionsMode.CustomColor -> IconReplacement.CustomColor(color = selectedColor.toColor())
             IconOptionsMode.CustomImage -> IconReplacement.CustomImage(

@@ -24,8 +24,8 @@ android {
     defaultConfig {
         minSdk = 28
         targetSdk = 36
-        versionCode = 10_00_02
-        versionName = "1.0.2"
+        versionCode = 10_00_00
+        versionName = "1.0.0"
 
         vectorDrawables {
             useSupportLibrary = true
@@ -34,6 +34,7 @@ android {
         buildConfigField("String", "APPLICATION_NAME", "\"Wintry Manager\"")
         buildConfigField("String", "TAG", "\"WintryManager\"")
 
+        buildConfigField("String", "GITHUB_ORG", "\"wtcord\"")
         buildConfigField("String", "SUPPORT_SERVER", "\"ybPB5tgD\"")
 
         buildConfigField("String", "BACKEND_URL", "\"https://aliucord.com/\"")

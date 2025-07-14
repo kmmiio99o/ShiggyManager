@@ -7,6 +7,7 @@ package com.aliucord.manager.patcher.util
 
 import com.aliucord.manager.manager.PathManager
 import com.android.apksig.ApkSigner
+import dev.wintry.manager.BuildConfig
 import org.bouncycastle.asn1.x500.X500Name
 import org.bouncycastle.asn1.x509.SubjectPublicKeyInfo
 import org.bouncycastle.cert.X509v3CertificateBuilder
@@ -31,7 +32,7 @@ object Signer : KoinComponent {
 
         // Create new keystore if it doesn't exist
         if (!paths.keystoreFile.exists()) {
-            paths.aliucordDir.mkdirs()
+            paths.wintryDir.mkdirs()
             newKeystore(paths.keystoreFile)
         }
 
@@ -42,7 +43,7 @@ object Signer : KoinComponent {
         val certificate = keyStore.getCertificate(alias) as X509Certificate
 
         ApkSigner.SignerConfig.Builder(
-            "Aliucord Manager signer",
+            "${BuildConfig.APPLICATION_NAME} signer",
             keyStore.getKey(alias, password) as PrivateKey,
             listOf(certificate)
         ).build()
@@ -64,7 +65,7 @@ object Signer : KoinComponent {
         do serialNumber = SecureRandom().nextInt().toBigInteger()
         while (serialNumber < BigInteger.ZERO)
 
-        val x500Name = X500Name("CN=Aliucord Manager")
+        val x500Name = X500Name("CN=${BuildConfig.APPLICATION_NAME}")
         val pair = KeyPairGenerator.getInstance("RSA").run {
             initialize(2048)
             generateKeyPair()

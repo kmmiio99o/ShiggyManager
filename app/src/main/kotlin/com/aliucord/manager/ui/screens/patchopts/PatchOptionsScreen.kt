@@ -85,6 +85,7 @@ class PatchOptionsScreen(
             selectedColor = when (iconModel.mode) {
                 IconOptionsMode.Original -> PatchOptions.IconReplacement.BlurpleColor
                 IconOptionsMode.OldDiscord -> PatchOptions.IconReplacement.OldBlurpleColor
+                IconOptionsMode.Wintry -> PatchOptions.IconReplacement.WintryColor
                 IconOptionsMode.Aliucord -> PatchOptions.IconReplacement.AliucordColor
                 IconOptionsMode.CustomColor -> iconModel.selectedColor.toColor()
                 IconOptionsMode.CustomImage -> null

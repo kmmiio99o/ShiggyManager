@@ -109,6 +109,11 @@ data class PatchOptions(
             val AliucordColor = Color(0xFF00C853)
 
             /**
+             * The default Wintry background color.
+             */
+            val WintryColor = Color(0xFF133E87)
+
+            /**
              * The new Discord blurple used in icons.
              */
             val BlurpleColor = Color(0xFF5865F2)
@@ -122,12 +127,12 @@ data class PatchOptions(
 
     companion object {
         val Default = PatchOptions(
-            appName = "Aliucord",
-            packageName = "com.aliucord",
+            appName = "Wintry",
+            packageName = "dev.wintry.app",
             debuggable = false,
-            iconReplacement = IconReplacement.CustomColor(IconReplacement.AliucordColor),
+            iconReplacement = IconReplacement.CustomColor(IconReplacement.WintryColor),
             versionPreference = VersionPreference.Stable,
-            customVersionCode = "126021",
+            customVersionCode = "",
         )
     }
 }

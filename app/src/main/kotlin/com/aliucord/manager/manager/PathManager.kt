@@ -18,6 +18,12 @@ class PathManager(
     val aliucordDir = Environment.getExternalStorageDirectory().resolve("Aliucord")
 
     /**
+     * The Wintry folder where shared Wintry files are stored.
+     * Standard path: `~/Wintry`
+     */
+    val wintryDir = Environment.getExternalStorageDirectory().resolve("Wintry")
+
+    /**
      * The directory in external storage in which plugins are stored by Aliucord.
      */
     val pluginsDir = aliucordDir.resolve("plugins")
@@ -30,7 +36,7 @@ class PathManager(
     /**
      * Global keystore used for signing APKs.
      */
-    val keystoreFile = aliucordDir.resolve("ks.keystore")
+    val keystoreFile = wintryDir.resolve("ks.keystore")
 
     /**
      * The internal directory used for downloading components related to patching, and

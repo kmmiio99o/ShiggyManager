@@ -120,6 +120,12 @@ fun IconOptionsScreenContent(
                 onClick = remember { { setMode(IconOptionsMode.OldDiscord) } },
             )
             RadioSelectorItem(
+                name = stringResource(R.string.wintry),
+                description = stringResource(R.string.iconopts_variant_desc_wintry),
+                selected = mode == IconOptionsMode.Wintry,
+                onClick = remember { { setMode(IconOptionsMode.Wintry) } },
+            )
+            RadioSelectorItem(
                 name = stringResource(R.string.aliucord),
                 description = stringResource(R.string.iconopts_variant_desc_aliucord),
                 selected = mode == IconOptionsMode.Aliucord,
@@ -214,6 +220,7 @@ private fun IconPreview(
                     IconOptionsMode.Original -> PatchOptions.IconReplacement.BlurpleColor
                     IconOptionsMode.OldDiscord -> PatchOptions.IconReplacement.OldBlurpleColor
                     IconOptionsMode.Aliucord -> PatchOptions.IconReplacement.AliucordColor
+                    IconOptionsMode.Wintry -> PatchOptions.IconReplacement.WintryColor
                     IconOptionsMode.CustomColor -> selectedColor.toColor()
                     IconOptionsMode.CustomImage -> error("unreachable")
                 }
