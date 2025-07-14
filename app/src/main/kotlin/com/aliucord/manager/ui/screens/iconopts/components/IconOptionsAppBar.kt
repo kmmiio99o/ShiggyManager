@@ -5,9 +5,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import cafe.adriel.voyager.navigator.LocalNavigator
-import com.aliucord.manager.R
 import com.aliucord.manager.ui.components.BackButton
 import com.aliucord.manager.ui.screens.settings.SettingsScreen
+import dev.wintry.manager.R
 
 @Composable
 fun IconOptionsAppBar() {

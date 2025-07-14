@@ -12,9 +12,9 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.aliucord.manager.R
 import com.aliucord.manager.ui.screens.patching.PatchingScreenState
 import com.aliucord.manager.ui.screens.patching.VERTICAL_PADDING
+import dev.wintry.manager.R
 
 @Composable
 fun FunFact(

@@ -1,10 +1,10 @@
 package com.aliucord.manager.patcher.steps.download
 
 import androidx.compose.runtime.Stable
-import com.aliucord.manager.BuildConfig
-import com.aliucord.manager.R
 import com.aliucord.manager.manager.PathManager
 import com.aliucord.manager.patcher.steps.base.DownloadStep
+import dev.wintry.manager.BuildConfig
+import dev.wintry.manager.R
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 

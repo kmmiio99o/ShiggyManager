@@ -22,7 +22,6 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.koinScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.aliucord.manager.R
 import com.aliucord.manager.ui.components.*
 import com.aliucord.manager.ui.components.dialogs.NetworkWarningDialog
 import com.aliucord.manager.ui.components.dialogs.UnknownSourcesPermissionDialog
@@ -33,6 +32,7 @@ import com.aliucord.manager.ui.screens.patchopts.components.PatchOptionsAppBar
 import com.aliucord.manager.ui.screens.patchopts.components.options.*
 import com.aliucord.manager.ui.util.*
 import com.aliucord.manager.util.*
+import dev.wintry.manager.R
 import kotlinx.coroutines.delay
 import kotlinx.parcelize.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize

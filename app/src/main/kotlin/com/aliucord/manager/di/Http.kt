@@ -1,7 +1,7 @@
 package com.aliucord.manager.di
 
 import android.app.Application
-import com.aliucord.manager.BuildConfig
+import dev.wintry.manager.BuildConfig
 import io.ktor.client.HttpClient
 import io.ktor.client.call.HttpClientCall
 import io.ktor.client.engine.okhttp.OkHttp
@@ -38,7 +38,7 @@ fun Scope.provideHttpClient() = HttpClient(OkHttp) {
     val application: Application = get()
 
     defaultRequest {
-        header(HttpHeaders.UserAgent, "Aliucord Manager/${BuildConfig.VERSION_NAME}")
+        header(HttpHeaders.UserAgent, "${BuildConfig.APPLICATION_NAME}/${BuildConfig.VERSION_NAME}")
     }
 
     engine {

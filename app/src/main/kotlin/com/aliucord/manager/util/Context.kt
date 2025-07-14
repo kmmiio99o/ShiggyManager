@@ -12,9 +12,9 @@ import android.util.TypedValue
 import android.widget.Toast
 import androidx.annotation.AnyRes
 import androidx.annotation.StringRes
-import com.aliucord.manager.BuildConfig
-import com.aliucord.manager.R
 import com.google.android.gms.safetynet.SafetyNet
+import dev.wintry.manager.BuildConfig
+import dev.wintry.manager.R
 import java.io.File
 import java.io.InputStream
 import kotlin.coroutines.resume

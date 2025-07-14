@@ -1,7 +1,5 @@
 package com.aliucord.manager.patcher.steps.patch
 
-import com.aliucord.manager.BuildConfig
-import com.aliucord.manager.R
 import com.aliucord.manager.network.utils.SemVer
 import com.aliucord.manager.patcher.InstallMetadata
 import com.aliucord.manager.patcher.StepRunner
@@ -10,6 +8,8 @@ import com.aliucord.manager.patcher.steps.base.Step
 import com.aliucord.manager.patcher.steps.download.*
 import com.aliucord.manager.ui.screens.patchopts.PatchOptions
 import com.github.diamondminer88.zip.ZipWriter
+import dev.wintry.manager.BuildConfig
+import dev.wintry.manager.R
 import kotlinx.serialization.json.Json
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject

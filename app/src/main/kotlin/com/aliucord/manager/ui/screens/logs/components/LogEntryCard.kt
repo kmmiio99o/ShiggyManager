@@ -17,11 +17,11 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.aliucord.manager.R
 import com.aliucord.manager.patcher.steps.base.StepState
 import com.aliucord.manager.ui.screens.logs.LogEntry
 import com.aliucord.manager.ui.screens.patching.components.StepStateIcon
 import com.aliucord.manager.ui.screens.patching.components.TimeElapsed
+import dev.wintry.manager.R
 
 @Composable
 fun LogEntryCard(

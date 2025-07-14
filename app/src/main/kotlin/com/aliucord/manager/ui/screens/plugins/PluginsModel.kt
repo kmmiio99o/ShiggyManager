@@ -5,8 +5,6 @@ import android.util.Log
 import androidx.compose.runtime.*
 import cafe.adriel.voyager.core.model.ScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
-import com.aliucord.manager.BuildConfig
-import com.aliucord.manager.R
 import com.aliucord.manager.manager.PathManager
 import com.aliucord.manager.ui.screens.plugins.model.PluginItem
 import com.aliucord.manager.ui.screens.plugins.model.PluginManifest
@@ -14,6 +12,8 @@ import com.aliucord.manager.ui.util.emptyImmutableList
 import com.aliucord.manager.ui.util.toUnsafeImmutable
 import com.aliucord.manager.util.*
 import com.github.diamondminer88.zip.ZipReader
+import dev.wintry.manager.BuildConfig
+import dev.wintry.manager.R
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*

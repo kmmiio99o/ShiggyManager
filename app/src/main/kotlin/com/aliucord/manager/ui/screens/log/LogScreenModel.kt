@@ -7,11 +7,11 @@ import androidx.compose.runtime.*
 import androidx.core.content.FileProvider
 import cafe.adriel.voyager.core.model.ScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
-import com.aliucord.manager.BuildConfig
-import com.aliucord.manager.R
 import com.aliucord.manager.manager.InstallLogData
 import com.aliucord.manager.manager.InstallLogManager
 import com.aliucord.manager.util.*
+import dev.wintry.manager.BuildConfig
+import dev.wintry.manager.R
 
 class LogScreenModel(
     private val installId: String,

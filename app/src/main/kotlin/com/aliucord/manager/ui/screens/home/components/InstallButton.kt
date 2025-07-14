@@ -12,9 +12,9 @@ import androidx.compose.ui.graphics.*
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.aliucord.manager.R
 import com.aliucord.manager.ui.util.thenIf
 import com.valentinilk.shimmer.*
+import dev.wintry.manager.R
 
 private val shimmerTheme = defaultShimmerTheme.copy(
     shimmerWidth = 150.dp,

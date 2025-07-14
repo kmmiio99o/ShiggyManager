@@ -10,8 +10,8 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
-import com.aliucord.manager.R
 import com.aliucord.manager.ui.components.ResetToDefaultButton
+import dev.wintry.manager.R
 
 @Composable
 fun PluginSearch(

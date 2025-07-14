@@ -2,10 +2,10 @@ package com.aliucord.manager.installers.pm
 
 import android.content.*
 import android.content.pm.PackageInstaller
-import com.aliucord.manager.R
 import com.aliucord.manager.installers.InstallerResult
 import com.aliucord.manager.installers.UnknownInstallerError
 import com.aliucord.manager.util.showToast
+import dev.wintry.manager.R
 
 /**
  * This receiver is meant to be registered dynamically in combination with [PMIntentReceiver] in order to

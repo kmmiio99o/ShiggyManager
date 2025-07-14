@@ -8,10 +8,10 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.graphics.Color
 import cafe.adriel.voyager.core.model.ScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
-import com.aliucord.manager.BuildConfig
-import com.aliucord.manager.R
 import com.aliucord.manager.ui.screens.patchopts.PatchOptions.IconReplacement
 import com.aliucord.manager.util.*
+import dev.wintry.manager.BuildConfig
+import dev.wintry.manager.R
 import dev.zt64.compose.pipette.HsvColor
 import java.io.IOException
 

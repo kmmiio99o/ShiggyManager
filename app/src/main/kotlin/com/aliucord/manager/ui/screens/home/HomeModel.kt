@@ -13,8 +13,6 @@ import androidx.core.graphics.drawable.toBitmap
 import androidx.core.net.toUri
 import cafe.adriel.voyager.core.model.ScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
-import com.aliucord.manager.BuildConfig
-import com.aliucord.manager.R
 import com.aliucord.manager.network.models.BuildInfo
 import com.aliucord.manager.network.models.RNATrackerIndex
 import com.aliucord.manager.network.services.*
@@ -26,6 +24,8 @@ import com.aliucord.manager.ui.util.DiscordVersion
 import com.aliucord.manager.ui.util.toUnsafeImmutable
 import com.aliucord.manager.util.*
 import com.github.diamondminer88.zip.ZipReader
+import dev.wintry.manager.BuildConfig
+import dev.wintry.manager.R
 import kotlinx.coroutines.*
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock

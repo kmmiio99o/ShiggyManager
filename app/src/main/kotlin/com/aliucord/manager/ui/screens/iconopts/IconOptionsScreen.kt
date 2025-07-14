@@ -34,7 +34,6 @@ import cafe.adriel.voyager.koin.koinScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import coil3.compose.AsyncImage
-import com.aliucord.manager.R
 import com.aliucord.manager.ui.components.*
 import com.aliucord.manager.ui.screens.iconopts.components.*
 import com.aliucord.manager.ui.screens.patchopts.PatchOptions
@@ -42,6 +41,7 @@ import com.aliucord.manager.ui.screens.patchopts.PatchOptionsScreen
 import com.aliucord.manager.ui.util.ColorSaver
 import com.aliucord.manager.ui.util.throttledState
 import com.aliucord.manager.util.back
+import dev.wintry.manager.R
 import dev.zt64.compose.pipette.CircularColorPicker
 import dev.zt64.compose.pipette.HsvColor
 import kotlinx.parcelize.IgnoredOnParcel

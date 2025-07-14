@@ -7,8 +7,6 @@ import androidx.compose.runtime.*
 import androidx.core.net.toUri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.aliucord.manager.BuildConfig
-import com.aliucord.manager.R
 import com.aliucord.manager.installers.InstallerResult
 import com.aliucord.manager.manager.InstallerManager
 import com.aliucord.manager.manager.InstallerSetting
@@ -19,6 +17,8 @@ import com.aliucord.manager.network.services.WintryGithubService
 import com.aliucord.manager.network.utils.SemVer
 import com.aliucord.manager.network.utils.getOrThrow
 import com.aliucord.manager.util.*
+import dev.wintry.manager.BuildConfig
+import dev.wintry.manager.R
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlin.system.exitProcess

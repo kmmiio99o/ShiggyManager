@@ -26,7 +26,6 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.koinScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.aliucord.manager.R
 import com.aliucord.manager.ui.components.LoadFailure
 import com.aliucord.manager.ui.components.ProjectHeader
 import com.aliucord.manager.ui.screens.home.components.*
@@ -35,6 +34,7 @@ import com.aliucord.manager.ui.screens.plugins.PluginsScreen
 import com.aliucord.manager.ui.util.paddings.PaddingValuesSides
 import com.aliucord.manager.ui.util.paddings.exclude
 import com.aliucord.manager.util.*
+import dev.wintry.manager.R
 import kotlinx.parcelize.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize
 

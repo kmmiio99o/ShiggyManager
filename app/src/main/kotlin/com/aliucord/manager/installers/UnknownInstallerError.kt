@@ -1,7 +1,7 @@
 package com.aliucord.manager.installers
 
 import android.content.Context
-import com.aliucord.manager.R
+import dev.wintry.manager.R
 import kotlinx.parcelize.Parcelize
 
 @Parcelize

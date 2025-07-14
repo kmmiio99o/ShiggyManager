@@ -1,8 +1,8 @@
 package com.aliucord.manager.network.services
 
 import android.util.Log
-import com.aliucord.manager.BuildConfig
 import com.aliucord.manager.network.utils.*
+import dev.wintry.manager.BuildConfig
 import io.ktor.client.HttpClient
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.request

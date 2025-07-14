@@ -27,8 +27,6 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.koinScreenModel
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.aliucord.manager.BuildConfig
-import com.aliucord.manager.R
 import com.aliucord.manager.patcher.steps.StepGroup
 import com.aliucord.manager.ui.components.MainActionButton
 import com.aliucord.manager.ui.components.Wakelock
@@ -42,6 +40,8 @@ import com.aliucord.manager.ui.util.spacedByLastAtBottom
 import com.aliucord.manager.ui.util.thenIf
 import com.aliucord.manager.util.back
 import com.aliucord.manager.util.isIgnoringBatteryOptimizations
+import dev.wintry.manager.BuildConfig
+import dev.wintry.manager.R
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.flow.filter
 import kotlinx.parcelize.IgnoredOnParcel

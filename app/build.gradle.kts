@@ -18,7 +18,7 @@ val gitHasLocalCommits = gitCurrentBranch?.let { providers.execIgnoreCode("git",
 val gitHasHasLocalChanges = providers.execIgnoreCode("git", "status", "-s").isNotEmpty()
 
 android {
-    namespace = "com.aliucord.manager"
+    namespace = "dev.wintry.manager"
     compileSdk = 36
 
     defaultConfig {
@@ -31,7 +31,8 @@ android {
             useSupportLibrary = true
         }
 
-        buildConfigField("String", "TAG", "\"AliucordManager\"")
+        buildConfigField("String", "APPLICATION_NAME", "\"Wintry Manager\"")
+        buildConfigField("String", "TAG", "\"WintryManager\"")
         buildConfigField("String", "SUPPORT_SERVER", "\"EsNDvBaHVU\"")
 
         buildConfigField("String", "BACKEND_URL", "\"https://aliucord.com/\"")

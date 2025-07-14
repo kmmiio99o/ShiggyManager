@@ -12,7 +12,6 @@ import androidx.core.graphics.applyCanvas
 import androidx.core.graphics.createBitmap
 import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory
 import androidx.core.graphics.drawable.toBitmap
-import com.aliucord.manager.R
 import com.aliucord.manager.patcher.StepRunner
 import com.aliucord.manager.patcher.steps.StepGroup
 import com.aliucord.manager.patcher.steps.base.Step
@@ -31,6 +30,7 @@ import com.aliucord.manager.ui.screens.patchopts.PatchOptions.IconReplacement
 import com.aliucord.manager.util.getResBytes
 import com.github.diamondminer88.zip.ZipWriter
 import com.google.devrel.gmscore.tools.apk.arsc.*
+import dev.wintry.manager.R
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import java.io.ByteArrayOutputStream

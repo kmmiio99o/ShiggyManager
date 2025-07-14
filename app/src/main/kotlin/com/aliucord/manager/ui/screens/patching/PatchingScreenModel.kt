@@ -7,8 +7,6 @@ import androidx.annotation.StringRes
 import androidx.compose.runtime.*
 import cafe.adriel.voyager.core.model.StateScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
-import com.aliucord.manager.BuildConfig
-import com.aliucord.manager.R
 import com.aliucord.manager.manager.*
 import com.aliucord.manager.patcher.StepRunner
 import com.aliucord.manager.patcher.WintryPatchRunner
@@ -19,6 +17,8 @@ import com.aliucord.manager.patcher.util.InsufficientStorageException
 import com.aliucord.manager.ui.screens.patchopts.PatchOptions
 import com.aliucord.manager.ui.util.toUnsafeImmutable
 import com.aliucord.manager.util.*
+import dev.wintry.manager.BuildConfig
+import dev.wintry.manager.R
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.ImmutableMap
 import kotlinx.coroutines.*

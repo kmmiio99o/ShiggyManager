@@ -1,7 +1,6 @@
 package com.aliucord.manager.patcher.steps.patch
 
 import android.os.Build
-import com.aliucord.manager.R
 import com.aliucord.manager.patcher.StepRunner
 import com.aliucord.manager.patcher.steps.StepGroup
 import com.aliucord.manager.patcher.steps.base.IDexProvider
@@ -9,6 +8,7 @@ import com.aliucord.manager.patcher.steps.base.Step
 import com.aliucord.manager.patcher.steps.download.CopyDependenciesStep
 import com.aliucord.manager.patcher.steps.download.DownloadAliuhookStep
 import com.github.diamondminer88.zip.*
+import dev.wintry.manager.R
 import org.koin.core.component.KoinComponent
 
 /**

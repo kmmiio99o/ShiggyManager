@@ -6,6 +6,8 @@
 package com.aliucord.manager.ui.screens.about
 
 import android.os.Parcelable
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -13,14 +15,15 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.koinScreenModel
-import com.aliucord.manager.R
 import com.aliucord.manager.ui.components.*
 import com.aliucord.manager.ui.screens.about.components.LeadContributor
 import com.aliucord.manager.ui.util.paddings.*
+import dev.wintry.manager.R
 import kotlinx.parcelize.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize
 
@@ -42,7 +45,7 @@ fun AboutScreenContent(state: State<AboutScreenState>) {
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(stringResource(R.string.navigation_about)) },
+                title = { Text(stringResource(R.string.navigation_about_manager)) },
                 navigationIcon = { BackButton() },
             )
         }
@@ -57,8 +60,35 @@ fun AboutScreenContent(state: State<AboutScreenState>) {
                 .padding(paddingValues.exclude(PaddingValuesSides.Bottom))
                 .padding(horizontal = 14.dp),
         ) {
+            item(key = "MANAGER_CREDIT_DISCLAIMER_BANNER") {
+                Box(
+                    contentAlignment = Alignment.Center,
+                    modifier = Modifier
+                        .padding(bottom = 24.dp)
+                        .border(
+                            width = 2.dp,
+                            color = MaterialTheme.colorScheme.surfaceVariant,
+                            shape = MaterialTheme.shapes.medium
+                        )
+                        .clip(MaterialTheme.shapes.medium)
+                        .background(MaterialTheme.colorScheme.surfaceContainerHigh)
+                ) {
+                    Row(
+                        horizontalArrangement = Arrangement.spacedBy(12.dp),
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier
+                            .padding(horizontal = 20.dp, vertical = 14.dp)
+                    ) {
+                        Text(
+                            text = stringResource(R.string.about_manager_credit_disclaimer_notice),
+                            style = MaterialTheme.typography.labelMedium,
+                        )
+                    }
+                }
+            }
+
             item(key = "PROJECT_HEADER") {
-                ProjectHeader()
+                ProjectHeader(aliucord = true)
             }
 
             item(key = "HEADER_DIVIDER") {

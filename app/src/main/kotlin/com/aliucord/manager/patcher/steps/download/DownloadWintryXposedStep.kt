@@ -1,12 +1,12 @@
 package com.aliucord.manager.patcher.steps.download
 
-import com.aliucord.manager.R
 import com.aliucord.manager.manager.PathManager
 import com.aliucord.manager.network.services.WintryGithubService
 import com.aliucord.manager.network.utils.SemVer
 import com.aliucord.manager.network.utils.getOrThrow
 import com.aliucord.manager.patcher.StepRunner
 import com.aliucord.manager.patcher.steps.base.DownloadStep
+import dev.wintry.manager.R
 import org.koin.core.component.inject
 
 class DownloadWintryXposedStep : DownloadStep() {

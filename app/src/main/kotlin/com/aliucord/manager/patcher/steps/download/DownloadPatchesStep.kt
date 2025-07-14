@@ -3,8 +3,6 @@ package com.aliucord.manager.patcher.steps.download
 import android.util.Log
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.mutableStateListOf
-import com.aliucord.manager.BuildConfig
-import com.aliucord.manager.R
 import com.aliucord.manager.manager.OverlayManager
 import com.aliucord.manager.manager.PathManager
 import com.aliucord.manager.network.utils.SemVer
@@ -13,6 +11,8 @@ import com.aliucord.manager.patcher.steps.base.DownloadStep
 import com.aliucord.manager.patcher.steps.base.StepState
 import com.aliucord.manager.patcher.steps.prepare.FetchInfoStep
 import com.aliucord.manager.ui.components.dialogs.CustomComponentVersionPicker
+import dev.wintry.manager.BuildConfig
+import dev.wintry.manager.R
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 

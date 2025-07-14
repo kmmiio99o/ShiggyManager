@@ -1,13 +1,13 @@
 package com.aliucord.manager.patcher.steps.install
 
 import android.os.Build
-import com.aliucord.manager.R
 import com.aliucord.manager.manager.PathManager
 import com.aliucord.manager.patcher.StepRunner
 import com.aliucord.manager.patcher.steps.StepGroup
 import com.aliucord.manager.patcher.steps.base.Step
 import com.aliucord.manager.patcher.steps.download.CopyDependenciesStep
 import com.github.diamondminer88.zip.*
+import dev.wintry.manager.R
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 

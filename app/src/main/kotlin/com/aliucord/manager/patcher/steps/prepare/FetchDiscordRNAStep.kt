@@ -1,6 +1,5 @@
 package com.aliucord.manager.patcher.steps.prepare
 
-import com.aliucord.manager.R
 import com.aliucord.manager.network.services.RNATrackerService
 import com.aliucord.manager.network.utils.getOrThrow
 import com.aliucord.manager.patcher.StepRunner
@@ -8,6 +7,7 @@ import com.aliucord.manager.patcher.steps.StepGroup
 import com.aliucord.manager.patcher.steps.base.Step
 import com.aliucord.manager.ui.screens.patchopts.PatchOptions
 import com.aliucord.manager.ui.screens.patchopts.VersionPreference
+import dev.wintry.manager.R
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import kotlin.properties.Delegates

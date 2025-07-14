@@ -13,8 +13,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.Dp
-import com.aliucord.manager.R
 import com.aliucord.manager.patcher.steps.base.StepState
+import dev.wintry.manager.R
 import kotlin.math.floor
 import kotlin.math.roundToInt
 

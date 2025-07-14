@@ -12,11 +12,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.aliucord.manager.BuildConfig
-import com.aliucord.manager.R
+import dev.wintry.manager.BuildConfig
+import dev.wintry.manager.R
 
 @Composable
-fun ProjectHeader(modifier: Modifier = Modifier) {
+fun ProjectHeader(
+    aliucord: Boolean = false,
+    modifier: Modifier = Modifier,
+) {
     val uriHandler = LocalUriHandler.current
 
     Column(
@@ -25,7 +28,7 @@ fun ProjectHeader(modifier: Modifier = Modifier) {
         modifier = modifier,
     ) {
         Image(
-            painter = painterResource(R.drawable.ic_aliucord_logo),
+            painter = painterResource(if (aliucord) R.drawable.ic_aliucord_logo else R.drawable.ic_rounded_wintry),
             contentDescription = null,
             modifier = Modifier
                 .padding(bottom = 6.dp)
@@ -33,12 +36,12 @@ fun ProjectHeader(modifier: Modifier = Modifier) {
         )
 
         Text(
-            text = stringResource(R.string.aliucord),
+            text = stringResource(if (aliucord) R.string.aliucord else R.string.wintry),
             style = MaterialTheme.typography.titleMedium.copy(fontSize = 26.sp)
         )
 
         Text(
-            text = stringResource(R.string.app_description),
+            text = stringResource(if (aliucord) R.string.aliucord_description else R.string.app_description),
             style = MaterialTheme.typography.titleSmall.copy(
                 color = MaterialTheme.colorScheme.onSurface.copy(alpha = .6f)
             ),

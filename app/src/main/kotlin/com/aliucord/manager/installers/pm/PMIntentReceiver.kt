@@ -5,9 +5,9 @@ import android.content.*
 import android.content.pm.PackageInstaller
 import android.util.Log
 import android.widget.Toast
-import com.aliucord.manager.BuildConfig
 import com.aliucord.manager.installers.InstallerResult
 import com.aliucord.manager.installers.UnknownInstallerError
+import dev.wintry.manager.BuildConfig
 
 /**
  * This class is used as a callback receiver for [PackageInstaller] events,

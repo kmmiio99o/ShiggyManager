@@ -2,7 +2,6 @@ package com.aliucord.manager.patcher.steps.install
 
 import android.content.Context
 import androidx.lifecycle.*
-import com.aliucord.manager.R
 import com.aliucord.manager.installers.InstallerResult
 import com.aliucord.manager.manager.*
 import com.aliucord.manager.patcher.StepRunner
@@ -15,6 +14,7 @@ import com.aliucord.manager.ui.screens.patchopts.PatchOptions
 import com.aliucord.manager.ui.util.InstallNotifications
 import com.aliucord.manager.util.isPackageInstalled
 import com.aliucord.manager.util.isPlayProtectEnabled
+import dev.wintry.manager.R
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 

@@ -19,8 +19,8 @@ import androidx.compose.ui.text.*
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
-import com.aliucord.manager.R
 import com.aliucord.manager.ui.screens.plugins.model.PluginItem
+import dev.wintry.manager.R
 
 @Composable
 fun PluginCard(

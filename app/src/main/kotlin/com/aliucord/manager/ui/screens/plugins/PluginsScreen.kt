@@ -17,12 +17,12 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.LifecycleResumeEffect
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.koinScreenModel
-import com.aliucord.manager.R
 import com.aliucord.manager.ui.components.BackButton
 import com.aliucord.manager.ui.screens.plugins.components.*
 import com.aliucord.manager.ui.screens.plugins.components.dialogs.UninstallPluginDialog
 import com.aliucord.manager.ui.screens.plugins.model.PluginItem
 import com.aliucord.manager.ui.util.paddings.*
+import dev.wintry.manager.R
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.parcelize.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize

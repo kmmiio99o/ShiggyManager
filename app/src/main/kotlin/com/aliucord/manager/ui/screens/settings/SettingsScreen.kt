@@ -20,11 +20,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.koin.koinScreenModel
-import com.aliucord.manager.R
 import com.aliucord.manager.ui.components.BackButton
 import com.aliucord.manager.ui.components.MainActionButton
 import com.aliucord.manager.ui.components.settings.*
 import com.aliucord.manager.ui.screens.settings.components.ThemeDialog
+import dev.wintry.manager.R
 import kotlinx.parcelize.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize
 

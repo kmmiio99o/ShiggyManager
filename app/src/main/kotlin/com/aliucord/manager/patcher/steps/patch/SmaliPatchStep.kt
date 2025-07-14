@@ -1,6 +1,5 @@
 package com.aliucord.manager.patcher.steps.patch
 
-import com.aliucord.manager.R
 import com.aliucord.manager.manager.PathManager
 import com.aliucord.manager.patcher.StepRunner
 import com.aliucord.manager.patcher.steps.StepGroup
@@ -18,6 +17,7 @@ import com.github.diamondminer88.zip.ZipReader
 import com.github.difflib.DiffUtils
 import com.github.difflib.UnifiedDiffUtils
 import com.github.difflib.patch.Patch
+import dev.wintry.manager.R
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import java.io.FileNotFoundException

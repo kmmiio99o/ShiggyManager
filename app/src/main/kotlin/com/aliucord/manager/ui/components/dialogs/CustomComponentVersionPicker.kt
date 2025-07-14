@@ -15,8 +15,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.DialogProperties
-import com.aliucord.manager.R
 import com.aliucord.manager.network.utils.SemVer
+import dev.wintry.manager.R
 
 @Composable
 fun CustomComponentVersionPicker(

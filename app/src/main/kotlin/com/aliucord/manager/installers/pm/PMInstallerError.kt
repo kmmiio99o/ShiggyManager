@@ -3,8 +3,8 @@ package com.aliucord.manager.installers.pm
 import android.content.Context
 import android.content.pm.PackageInstaller
 import android.os.Parcelable
-import com.aliucord.manager.R
 import com.aliucord.manager.installers.InstallerResult
+import dev.wintry.manager.R
 import kotlinx.parcelize.Parcelize
 
 /**

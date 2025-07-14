@@ -9,7 +9,7 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.aliucord.manager.R
+import dev.wintry.manager.R
 
 @Composable
 fun LogsNone(modifier: Modifier = Modifier) {

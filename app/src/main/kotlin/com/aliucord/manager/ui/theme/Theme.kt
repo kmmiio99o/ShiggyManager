@@ -13,8 +13,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import com.aliucord.manager.R
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import dev.wintry.manager.R
 
 @Composable
 fun ManagerTheme(
