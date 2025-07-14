@@ -15,6 +15,7 @@ import com.aliucord.manager.manager.InstallerSetting
 import com.aliucord.manager.manager.download.IDownloadManager
 import com.aliucord.manager.manager.download.KtorDownloadManager
 import com.aliucord.manager.network.services.AliucordGithubService
+import com.aliucord.manager.network.services.WintryGithubService
 import com.aliucord.manager.network.utils.SemVer
 import com.aliucord.manager.network.utils.getOrThrow
 import com.aliucord.manager.util.*
@@ -23,7 +24,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlin.system.exitProcess
 
 class UpdaterViewModel(
-    private val github: AliucordGithubService,
+    private val github: WintryGithubService,
     private val downloader: KtorDownloadManager,
     private val installers: InstallerManager,
     private val application: Application,
@@ -130,7 +131,7 @@ class UpdaterViewModel(
     /**
      * This fetched the releases data from GitHub and populates the state if there is an update.
      *
-     * It obtains all the releases that have an asset named `aliucord-manager-[tag].apk`,
+     * It obtains all the releases that have an asset named `*-manager-[tag].apk`,
      * then finds the latest release based on the largest semantic version extracted from the tag name (`v1.0.0`),
      * and populates the state to show to the user.
      */
@@ -149,7 +150,7 @@ class UpdaterViewModel(
                 val version = SemVer.parseOrNull(release.tagName)
                     ?: return@mapNotNull null
 
-                val asset = release.assets.find { it.name == "aliucord-manager-${release.tagName}.apk" }
+                val asset = release.assets.find { it.name.endsWith("-manager-${release.tagName}.apk") }
                     ?: return@mapNotNull null
 
                 version to asset.browserDownloadUrl
