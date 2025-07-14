@@ -33,7 +33,8 @@ android {
 
         buildConfigField("String", "APPLICATION_NAME", "\"Wintry Manager\"")
         buildConfigField("String", "TAG", "\"WintryManager\"")
-        buildConfigField("String", "SUPPORT_SERVER", "\"EsNDvBaHVU\"")
+
+        buildConfigField("String", "SUPPORT_SERVER", "\"ybPB5tgD\"")
 
         buildConfigField("String", "BACKEND_URL", "\"https://aliucord.com/\"")
 
@@ -195,12 +196,10 @@ dependencies {
 }
 
 configurations.all {
-    // ---- Previous Exclusions ----
     exclude(group = "org.bouncycastle")
     exclude(group = "org.checkerframework", module = "checker-qual")
     exclude(group = "com.aliucord", module = "axml")
 
-    // ---- New Exclusions ----
     // Exclude apksig, as it's bundled in LSPatch
     exclude(group = "com.android.tools.build", module = "apksig")
 
