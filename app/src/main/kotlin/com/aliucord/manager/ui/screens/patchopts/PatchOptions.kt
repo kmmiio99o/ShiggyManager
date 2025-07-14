@@ -10,6 +10,13 @@ import kotlinx.parcelize.TypeParceler
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+enum class VersionPreference {
+    Stable,
+    Beta,
+    Alpha,
+    Custom;
+}
+
 @Immutable
 @Parcelize
 @Serializable
@@ -33,6 +40,16 @@ data class PatchOptions(
      * Replacement of the user-facing launcher icon.
      */
     val iconReplacement: IconReplacement,
+
+    /**
+     * Version preference to fetch and install
+     */
+    val versionPreference: VersionPreference,
+
+    /**
+     * Version to fetch and install when versionPreference is set to VersionPreference.Custom.
+     */
+    val customVersionCode: String,
 ) : Parcelable {
     @Immutable
     @Parcelize
@@ -109,6 +126,8 @@ data class PatchOptions(
             packageName = "com.aliucord",
             debuggable = false,
             iconReplacement = IconReplacement.CustomColor(IconReplacement.AliucordColor),
+            versionPreference = VersionPreference.Stable,
+            customVersionCode = "126021",
         )
     }
 }

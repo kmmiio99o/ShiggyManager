@@ -16,13 +16,12 @@ import cafe.adriel.voyager.core.model.screenModelScope
 import com.aliucord.manager.BuildConfig
 import com.aliucord.manager.R
 import com.aliucord.manager.network.models.BuildInfo
-import com.aliucord.manager.network.services.AliucordGithubService
-import com.aliucord.manager.network.services.AliucordMavenService
+import com.aliucord.manager.network.models.RNATrackerIndex
+import com.aliucord.manager.network.services.*
 import com.aliucord.manager.network.utils.SemVer
 import com.aliucord.manager.network.utils.fold
 import com.aliucord.manager.patcher.InstallMetadata
-import com.aliucord.manager.ui.screens.patchopts.PatchOptions
-import com.aliucord.manager.ui.screens.patchopts.PatchOptionsScreen
+import com.aliucord.manager.ui.screens.patchopts.*
 import com.aliucord.manager.ui.util.DiscordVersion
 import com.aliucord.manager.ui.util.toUnsafeImmutable
 import com.aliucord.manager.util.*
@@ -38,6 +37,8 @@ class HomeModel(
     private val application: Application,
     private val github: AliucordGithubService,
     private val maven: AliucordMavenService,
+    private val wtGithub: WintryGithubService,
+    private val rnaTracker: RNATrackerService,
     private val json: Json,
 ) : ScreenModel {
     var installsState by mutableStateOf<InstallsState>(InstallsState.Fetching)
@@ -45,6 +46,8 @@ class HomeModel(
 
     private val refreshingLock = Mutex()
     private var remoteDataJson: BuildInfo? = null
+    private var trackerIndexJson: RNATrackerIndex? = null
+    private var latestWintryXposedVersion: SemVer? = null
     private var latestAliuhookVersion: SemVer? = null
 
     init {
@@ -106,7 +109,7 @@ class HomeModel(
         val metadata = try {
             val applicationInfo = application.packageManager.getApplicationInfo(packageName, 0)
             val metadataFile = ZipReader(applicationInfo.publicSourceDir)
-                .use { it.openEntry("aliucord.json")?.read() }
+                .use { it.openEntry("wintry.json")?.read() }
 
             @OptIn(ExperimentalSerializationApi::class)
             metadataFile?.let { json.decodeFromStream<InstallMetadata>(it.inputStream()) }
@@ -187,21 +190,35 @@ class HomeModel(
 
     private suspend fun fetchRemoteData() {
         listOf(
+            // // These aren't needed by Wintry
+            // screenModelScope.launch(Dispatchers.IO) {
+            //     github.getBuildData().fold(
+            //         success = { remoteDataJson = it },
+            //         fail = { Log.w(BuildConfig.TAG, "Failed to fetch remote build data", it) },
+            //     )
+            // },
+            // screenModelScope.launch(Dispatchers.IO) {
+            //     maven.getAliuhookVersion().fold(
+            //         success = { latestAliuhookVersion = it },
+            //         fail = { Log.w(BuildConfig.TAG, "Failed to fetch latest Aliuhook version", it) },
+            //     )
+            // },
             screenModelScope.launch(Dispatchers.IO) {
-                github.getBuildData().fold(
-                    success = { remoteDataJson = it },
-                    fail = { Log.w(BuildConfig.TAG, "Failed to fetch remote build data", it) },
+                rnaTracker.getLatestDiscordVersions().fold(
+                    success = { trackerIndexJson = it },
+                    fail = { Log.w(BuildConfig.TAG, "Failed to fetch latest Discord RNA versions", it) },
                 )
             },
             screenModelScope.launch(Dispatchers.IO) {
-                maven.getAliuhookVersion().fold(
-                    success = { latestAliuhookVersion = it },
-                    fail = { Log.w(BuildConfig.TAG, "Failed to fetch latest Aliuhook version", it) },
+                wtGithub.getLatestXposedRelease().fold(
+                    success = { latestWintryXposedVersion = SemVer.parse(it.name) },
+                    fail = { Log.w(BuildConfig.TAG, "Failed to fetch latest WintryXposed version", it) },
                 )
             },
+
         ).joinAll()
 
-        if (remoteDataJson == null || latestAliuhookVersion == null) {
+        if (trackerIndexJson == null /* remoteDataJson == null || latestAliuhookVersion == null */ || latestWintryXposedVersion == null) {
             mainThread { application.showToast(R.string.home_network_fail) }
         }
     }
@@ -213,34 +230,34 @@ class HomeModel(
         return application.packageManager
             .getInstalledPackages(PackageManager.GET_META_DATA)
             .filter {
-                // Packages installed via the legacy Installer do not have the metadata marker
-                val isAliucordPkg = it.packageName == "com.aliucord"
-                val hasAliucordMeta = it.applicationInfo?.metaData?.containsKey("isAliucord") == true
-                isAliucordPkg || hasAliucordMeta
+                // Wintry doesn't have "legacy installer" whatsoever
+                return@filter it.applicationInfo?.metaData?.containsKey("isWintry") == true
+
+                // // Packages installed via the legacy Installer do not have the metadata marker
+                // val isAliucordPkg = it.packageName == "com.aliucord"
+                // val hasAliucordMeta = it.applicationInfo?.metaData?.containsKey("isAliucord") == true
+                // isAliucordPkg || hasAliucordMeta
             }
     }
 
     /**
-     * Attempts to determine whether the Aliucord installation is up-to-date.
-     * If `null` is returned, then the build data was not fetched, and as such
-     * the status cannot be determined.
+     * Checks whether the current Wintry installation is up-to-date.
+     *
+     * Currently mirrors the behavior of Bunny Manager by directly comparing against
+     * the latest available Discord and WintryXposed release. This is a temporary approach and will remain
+     * in place until Wintry adds support for version pinning.
      */
     private fun isInstallationUpToDate(pkg: PackageInfo): Boolean? {
-        // Assume up-to-date when remote data hasn't been fetched yet
-        val remoteBuildData = remoteDataJson ?: return null
-        val latestAliuhookVersion = latestAliuhookVersion ?: return null
+        val trackerData = trackerIndexJson ?: return null
 
         // `longVersionCode` is unnecessary since Discord doesn't use `versionCodeMajor`
         @Suppress("DEPRECATION")
         val versionCode = pkg.versionCode
 
-        // Check if the base APK version is a mismatch
-        if (remoteBuildData.discordVersionCode != versionCode) return false
-
         // Try to parse install metadata. If none present, install was made via legacy installer.
         val apkPath = pkg.applicationInfo?.publicSourceDir ?: return false
         val installMetadata = try {
-            val metadataFile = ZipReader(apkPath).use { it.openEntry("aliucord.json")?.read() }
+            val metadataFile = ZipReader(apkPath).use { it.openEntry("wintry.json")?.read() }
                 ?: return false
 
             @OptIn(ExperimentalSerializationApi::class)
@@ -250,11 +267,13 @@ class HomeModel(
             return false
         }
 
-        // Check that all the installation components are up-to-date (skip not installed)
-        val injectorUpToDate = installMetadata.injectorVersion == null || remoteBuildData.injectorVersion == installMetadata.injectorVersion
-        val patchesUpToDate = installMetadata.patchesVersion == null || remoteBuildData.patchesVersion == installMetadata.patchesVersion
-        val aliuhookUpToDate = installMetadata.aliuhookVersion == null || latestAliuhookVersion == installMetadata.aliuhookVersion
+        val latestByPref = when (installMetadata.options.versionPreference) {
+            VersionPreference.Stable -> trackerData.latest.stable
+            VersionPreference.Beta -> trackerData.latest.beta
+            VersionPreference.Alpha -> trackerData.latest.alpha
+            VersionPreference.Custom -> return true
+        }
 
-        return injectorUpToDate && patchesUpToDate && aliuhookUpToDate
+        return latestByPref == versionCode && installMetadata.wintryXposedVersion == latestWintryXposedVersion
     }
 }

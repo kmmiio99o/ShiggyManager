@@ -9,6 +9,7 @@ import androidx.core.content.getSystemService
 import cafe.adriel.voyager.core.model.ScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
 import com.aliucord.manager.manager.PreferencesManager
+import com.aliucord.manager.ui.util.DiscordVersion
 import com.aliucord.manager.util.*
 
 class PatchOptionsModel(
@@ -48,6 +49,26 @@ class PatchOptionsModel(
         debuggable = value
     }
 
+    // ---------- Version preference state ----------
+    var versionPreference by mutableStateOf(prefilledOptions.versionPreference)
+        private set
+
+    fun changeVersionPreference(value: VersionPreference) {
+        versionPreference = value
+    }
+
+    // ---------- Custom version code state ----------
+    var customVersionCode by mutableStateOf(prefilledOptions.customVersionCode)
+        private set
+
+    var customVersionCodeIsError by mutableStateOf(false)
+        private set
+
+    fun changeCustomVersionCode(value: String) {
+        customVersionCode = value
+        customVersionCodeIsError = !DiscordVersion.isValid(value)
+    }
+
     // ---------- Other ----------
     var showNetworkWarningDialog by mutableStateOf(!alreadyShownNetworkWarning && isNetworkDangerous())
         private set
@@ -76,6 +97,8 @@ class PatchOptionsModel(
             packageName = packageName,
             debuggable = debuggable,
             iconReplacement = icon,
+            versionPreference = versionPreference,
+            customVersionCode = customVersionCode,
         )
     }
 

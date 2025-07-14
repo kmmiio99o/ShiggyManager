@@ -17,6 +17,7 @@ open class DownloadDiscordStep : DownloadStep(), KoinComponent {
     protected val paths: PathManager by inject()
 
     override val localizedName = R.string.patch_step_dl_kt_apk
+
     override val targetUrl = getDiscordApkUrl(DISCORD_KT_VERSION)
     override val targetFile = paths.discordApkVersionCache(DISCORD_KT_VERSION)
         .resolve("discord.apk")

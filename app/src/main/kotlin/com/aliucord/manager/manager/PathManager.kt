@@ -116,6 +116,10 @@ class PathManager(
     fun cachedKotlinDex() = patchingDownloadDir
         .resolve("kotlin.dex")
 
+    fun cachedWintryXposed(version: SemVer) = patchingDownloadDir
+        .resolve("wt-xposed")
+        .resolve("$version.apk")
+
     /**
      * The temporary working directory of a currently executing patching process.
      */

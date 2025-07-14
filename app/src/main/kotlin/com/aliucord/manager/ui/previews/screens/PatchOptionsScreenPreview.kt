@@ -32,6 +32,11 @@ private fun PatchOptionsScreenPreview(
             packageName = parameters.packageName,
             packageNameState = parameters.packageNameState,
             setPackageName = {},
+            versionPreference = parameters.versionPreference,
+            setVersionPreference = {},
+            customVersionCode = parameters.customVersionCode,
+            customVersionCodeIsError = parameters.customVersionCodeIsError,
+            setCustomVersionCode = {},
             isConfigValid = parameters.isConfigValid,
             onInstall = {},
         )
@@ -50,6 +55,9 @@ private data class PatchOptionsParameters(
     val appNameIsError: Boolean,
     val packageName: String,
     val packageNameState: PackageNameState,
+    val versionPreference: VersionPreference,
+    val customVersionCode: String,
+    val customVersionCodeIsError: Boolean,
     val isConfigValid: Boolean,
 )
 
@@ -67,6 +75,9 @@ private class PatchOptionsParametersProvider : PreviewParameterProvider<PatchOpt
             appNameIsError = false,
             packageName = PatchOptions.Default.packageName,
             packageNameState = PackageNameState.Ok,
+            versionPreference = VersionPreference.Stable,
+            customVersionCode = "",
+            customVersionCodeIsError = false,
             isConfigValid = true,
         ),
         PatchOptionsParameters(
@@ -80,6 +91,9 @@ private class PatchOptionsParametersProvider : PreviewParameterProvider<PatchOpt
             appNameIsError = true,
             packageName = "a b",
             packageNameState = PackageNameState.Invalid,
+            versionPreference = VersionPreference.Stable,
+            customVersionCode = "",
+            customVersionCodeIsError = false,
             isConfigValid = false,
         ),
         PatchOptionsParameters(
@@ -93,6 +107,9 @@ private class PatchOptionsParametersProvider : PreviewParameterProvider<PatchOpt
             appNameIsError = false,
             packageName = PatchOptions.Default.packageName,
             packageNameState = PackageNameState.Taken,
+            versionPreference = VersionPreference.Stable,
+            customVersionCode = "",
+            customVersionCodeIsError = false,
             isConfigValid = true,
         ),
     )

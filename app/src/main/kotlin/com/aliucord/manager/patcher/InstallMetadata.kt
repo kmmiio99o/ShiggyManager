@@ -5,7 +5,7 @@ import com.aliucord.manager.ui.screens.patchopts.PatchOptions
 import kotlinx.serialization.Serializable
 
 /**
- * Data stored inside patched APKs as "aliucord.json" in order to preserve install-time information about Aliucord and the Manager.
+ * Data stored inside patched APKs as ~~"aliucord.json"~~ "wintry.json" in order to preserve install-time information about Aliucord and the Manager.
  */
 @Serializable
 data class InstallMetadata(
@@ -38,4 +38,14 @@ data class InstallMetadata(
      * Version of the smali patches that were applied onto the APK.
      */
     val patchesVersion: SemVer?,
+
+    /**
+     * Version of LSPatch used to inject Xposed module into the APK.
+     */
+    val lspatchVersion: Int?,
+
+    /**
+     * Version of WintryXposed embedded into the APK.
+     */
+    val wintryXposedVersion: SemVer?,
 )

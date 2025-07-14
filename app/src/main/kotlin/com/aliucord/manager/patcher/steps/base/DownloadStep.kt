@@ -22,9 +22,6 @@ abstract class DownloadStep : Step(), KoinComponent {
     private val context: Context by inject()
     private val downloader: KtorDownloadManager by inject()
 
-    // Temporary
-    protected val version: Int = 289210
-
     /**
      * The remote url to download
      */

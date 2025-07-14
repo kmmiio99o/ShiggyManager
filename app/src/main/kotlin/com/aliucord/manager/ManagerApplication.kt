@@ -48,6 +48,8 @@ class ManagerApplication : Application() {
                 singleOf(::HttpService)
                 singleOf(::AliucordGithubService)
                 singleOf(::AliucordMavenService)
+                singleOf(::RNATrackerService)
+                singleOf(::WintryGithubService)
             })
 
             // UI Models

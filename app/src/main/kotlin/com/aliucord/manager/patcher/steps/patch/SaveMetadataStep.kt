@@ -13,6 +13,7 @@ import com.github.diamondminer88.zip.ZipWriter
 import kotlinx.serialization.json.Json
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
+import org.lsposed.lspatch.share.LSPConfig
 
 /**
  * Store the install options and additional data inside the APK for future use,
@@ -30,6 +31,7 @@ class SaveMetadataStep(private val options: PatchOptions) : Step(), KoinComponen
         val aliuhook = container.getStepOrNull<DownloadAliuhookStep>()
         val injector = container.getStepOrNull<DownloadInjectorStep>()
         val patches = container.getStepOrNull<DownloadPatchesStep>()
+        val wintryXposed = container.getStepOrNull<DownloadWintryXposedStep>()
 
         val metadata = InstallMetadata(
             options = options,
@@ -38,11 +40,13 @@ class SaveMetadataStep(private val options: PatchOptions) : Step(), KoinComponen
             aliuhookVersion = aliuhook?.targetVersion,
             injectorVersion = injector?.targetVersion,
             patchesVersion = patches?.targetVersion,
+            lspatchVersion = LSPConfig.instance.VERSION_CODE,
+            wintryXposedVersion = wintryXposed?.targetVersion,
         )
 
         container.log("Writing serialized install metadata to APK")
         ZipWriter(apk, /* append = */ true).use {
-            it.writeEntry("aliucord.json", json.encodeToString<InstallMetadata>(metadata))
+            it.writeEntry("wintry.json", json.encodeToString<InstallMetadata>(metadata))
         }
     }
 }

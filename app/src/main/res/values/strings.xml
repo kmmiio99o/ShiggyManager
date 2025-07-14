@@ -252,4 +252,8 @@
   <string name="downloading_resources_apk">Downloading resources apk</string>
   <string name="injecting_wintryxposed_with_lspatch">Injecting WintryXposed with LSPatch</string>
   <string name="downloading_wintryxposed">Downloading WintryXposed</string>
+  <string name="version_code">Version Code</string>
+  <string name="fetching_latest_discord_info">Fetching latest Discord info</string>
+  <string name="invalid_version_code_format">Invalid version code format</string>
+  <string name="reinstall">Reinstall</string>
 </resources>

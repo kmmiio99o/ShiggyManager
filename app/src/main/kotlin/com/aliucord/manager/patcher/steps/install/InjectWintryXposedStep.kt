@@ -5,7 +5,7 @@ import com.aliucord.manager.patcher.StepRunner
 import com.aliucord.manager.patcher.steps.StepGroup
 import com.aliucord.manager.patcher.steps.base.Step
 import com.aliucord.manager.patcher.steps.download.CopyDependenciesStep
-import com.aliucord.manager.patcher.steps.download.DownloadWintryXposed
+import com.aliucord.manager.patcher.steps.download.DownloadWintryXposedStep
 import com.aliucord.manager.patcher.util.Signer
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -58,7 +58,7 @@ class InjectWintryXposedStep : Step() {
 
     override suspend fun execute(container: StepRunner) {
         val apks = container.getStep<CopyDependenciesStep>().patchedApks
-        val xposed = container.getStep<DownloadWintryXposed>().targetFile
+        val xposed = container.getStep<DownloadWintryXposedStep>().targetFile
 
         container.log("Adding WintryXposed module with LSPatch")
         container.log("WintryXposed path = ${xposed.absolutePath}")

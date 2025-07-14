@@ -1,6 +1,7 @@
 package com.aliucord.manager.ui.screens.patchopts
 
 import android.os.Parcelable
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.*
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
@@ -30,8 +31,7 @@ import com.aliucord.manager.ui.screens.patching.PatchingScreen
 import com.aliucord.manager.ui.screens.patchopts.components.PackageNameStateLabel
 import com.aliucord.manager.ui.screens.patchopts.components.PatchOptionsAppBar
 import com.aliucord.manager.ui.screens.patchopts.components.options.*
-import com.aliucord.manager.ui.util.InstallNotifications
-import com.aliucord.manager.ui.util.spacedByLastAtBottom
+import com.aliucord.manager.ui.util.*
 import com.aliucord.manager.util.*
 import kotlinx.coroutines.delay
 import kotlinx.parcelize.IgnoredOnParcel
@@ -101,6 +101,13 @@ class PatchOptionsScreen(
             packageNameState = model.packageNameState,
             setPackageName = model::changePackageName,
 
+            versionPreference = model.versionPreference,
+            setVersionPreference = model::changeVersionPreference,
+
+            customVersionCode = model.customVersionCode,
+            customVersionCodeIsError = model.customVersionCodeIsError,
+            setCustomVersionCode = model::changeCustomVersionCode,
+
             isConfigValid = model.isConfigValid,
             onInstall = onInstall@{
                 val iconConfig = iconModel.generateConfig()
@@ -136,6 +143,13 @@ fun PatchOptionsScreenContent(
     packageName: String,
     packageNameState: PackageNameState,
     setPackageName: (String) -> Unit,
+
+    versionPreference: VersionPreference,
+    setVersionPreference: (VersionPreference) -> Unit,
+
+    customVersionCode: String,
+    customVersionCodeIsError: Boolean,
+    setCustomVersionCode: (String) -> Unit,
 
     isConfigValid: Boolean,
     onInstall: () -> Unit,
@@ -234,6 +248,40 @@ fun PatchOptionsScreenContent(
                     state = packageNameState,
                     modifier = Modifier.padding(start = 4.dp),
                 )
+            }
+
+            SelectPatchOption(
+                icon = painterResource(R.drawable.ic_app_shortcut),
+                name = "Preferred version",
+                description = "Choose which release channel or input a custom version code to use for installation.",
+                options = VersionPreference.entries.map { it.name },
+                selectedOption = versionPreference.name,
+                onOptionSelected = { selected ->
+                    setVersionPreference(VersionPreference.valueOf(selected))
+                }
+            )
+
+            AnimatedVisibility(
+                visible = versionPreference == VersionPreference.Custom,
+                label = "Custom version code option visibility"
+            ) {
+                TextPatchOption(
+                    name = "Custom version code",
+                    description = "Input a custom version code to use for installation.",
+                    value = customVersionCode,
+                    valueIsError = customVersionCodeIsError,
+                    valueIsDefault = customVersionCode == PatchOptions.Default.customVersionCode,
+                    onValueChange = setCustomVersionCode,
+                    onValueReset = {
+                        setCustomVersionCode(PatchOptions.Default.customVersionCode)
+                    }
+                ) {
+                    VersionDisplay(
+                        version = DiscordVersion.parseFromString(customVersionCode),
+                        style = MaterialTheme.typography.bodySmall,
+                        modifier = Modifier.padding(start = 4.dp),
+                    )
+                }
             }
 
             if (isDevMode) {

@@ -88,25 +88,21 @@ fun InstalledItemCard(
                 horizontalArrangement = Arrangement.spacedBy(2.dp),
                 modifier = Modifier.clip(MaterialTheme.shapes.large),
             ) {
-                SegmentedButton(
-                    icon = painterResource(R.drawable.ic_extension),
-                    text = stringResource(R.string.plugins_title),
-                    onClick = onOpenPlugins,
-                )
-                SegmentedButton(
-                    icon = painterResource(R.drawable.ic_info),
-                    text = stringResource(R.string.action_open_info),
-                    onClick = onOpenInfo,
-                )
+                // // Plugins cannot be managed externally yet in Wintry
+                // SegmentedButton(
+                //     icon = painterResource(R.drawable.ic_extension),
+                //     text = stringResource(R.string.plugins_title),
+                //     onClick = onOpenPlugins,
+                // )
 
                 // If the up-to-date status cannot be determined, assume it is up-to-date
-                if (data.isUpToDate ?: true) {
+                if (data.isUpToDate != false)
                     SegmentedButton(
-                        icon = painterResource(R.drawable.ic_launch),
-                        text = stringResource(R.string.action_launch),
-                        onClick = onOpenApp,
+                        icon = painterResource(R.drawable.ic_refresh),
+                        text = stringResource(R.string.reinstall),
+                        onClick = onUpdate,
                     )
-                } else {
+                else {
                     val warningColor = Color(0xFFFFBB33)
 
                     SegmentedButton(
@@ -117,6 +113,16 @@ fun InstalledItemCard(
                         onClick = onUpdate,
                     )
                 }
+                SegmentedButton(
+                    icon = painterResource(R.drawable.ic_info),
+                    text = stringResource(R.string.action_open_info),
+                    onClick = onOpenInfo,
+                )
+                SegmentedButton(
+                    icon = painterResource(R.drawable.ic_launch),
+                    text = stringResource(R.string.action_launch),
+                    onClick = onOpenApp,
+                )
             }
         }
     }

@@ -42,7 +42,7 @@ class CopyDependenciesStep : Step(), KoinComponent {
     override val localizedName = R.string.patch_step_copy_deps
 
     override suspend fun execute(container: StepRunner) {
-        val srcApk = container.getStep<DownloadDiscordStep>().targetFile
+        val srcApk = container.getStepOrNull<DownloadDiscordRNABaseStep>()?.targetFile ?: container.getStepOrNull<DownloadDiscordStep>()!!.targetFile
         val langApk = container.getStepOrNull<DownloadDiscordRNALangStep>()?.targetFile
         val libApk = container.getStepOrNull<DownloadDiscordRNALibStep>()?.targetFile
         val resApk = container.getStepOrNull<DownloadDiscordRNAResourcesStep>()?.targetFile

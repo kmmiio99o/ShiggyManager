@@ -35,7 +35,7 @@ object ManifestPatcher {
         vmSafeMode: Boolean? = true,
         useEmbeddedDex: Boolean? = true,
         extractNativeLibs: Boolean? = false,
-        addAliucordMetadata: Boolean? = true,
+        addManagerMetadata: Boolean? = true,
         modifyPermissions: Boolean? = true,
         modifyProviders: Boolean? = true,
         modifyActivities: Boolean? = true,
@@ -128,7 +128,7 @@ object ManifestPatcher {
                                 private var shouldAddLegacyStorage = requestLegacyExternalStorage ?: false
                                 private var shouldAddUseEmbeddedDex = useEmbeddedDex ?: false
                                 private var shouldAddExtractNativeLibs = extractNativeLibs ?: false
-                                private var shouldAddMetadata = addAliucordMetadata ?: false
+                                private var shouldAddMetadata = addManagerMetadata ?: false
 
                                 override fun attr(ns: String?, name: String, resourceId: Int, type: Int, value: Any?) {
                                     if (name == NETWORK_SECURITY_CONFIG) return
@@ -142,10 +142,16 @@ object ManifestPatcher {
                                 override fun child(ns: String?, name: String): NodeVisitor {
                                     val visitor = super.child(ns, name)
 
-                                    if (shouldAddMetadata && addAliucordMetadata == true) {
+                                    if (shouldAddMetadata && addManagerMetadata == true) {
                                         shouldAddMetadata = false
                                         super.child(ANDROID_NAMESPACE, "meta-data").apply {
-                                            attr(ANDROID_NAMESPACE, "name", android.R.attr.name, TYPE_STRING, "isAliucord")
+                                            attr(
+                                                ANDROID_NAMESPACE,
+                                                "name",
+                                                android.R.attr.name,
+                                                TYPE_STRING,
+                                                "isWintry" /* originally "isAliucord" */
+                                            )
                                             attr(ANDROID_NAMESPACE, "value", android.R.attr.value, TYPE_INT_BOOLEAN, 1)
                                         }
                                     }

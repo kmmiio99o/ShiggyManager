@@ -38,9 +38,15 @@ class DowngradeCheckStep(private val options: PatchOptions) : Step(), KoinCompon
         }
         container.log("Version of installed Discord app: $currentVersion")
 
-        val targetVersion = container
-            .getStep<FetchInfoStep>()
-            .data.discordVersionCode
+        var targetVersion: Int
+
+        val fetchInfo = container.getStepOrNull<FetchInfoStep>()
+        if (fetchInfo != null) {
+            targetVersion = fetchInfo.data.discordVersionCode
+        } else {
+            val rnaFetchInfo = container.getStep<FetchDiscordRNAStep>()
+            targetVersion = rnaFetchInfo.targetVersion
+        }
 
         container.log("Target discord version: $targetVersion")
 

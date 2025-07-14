@@ -11,6 +11,9 @@ import kotlinx.parcelize.Parcelize
 @Immutable
 sealed interface DiscordVersion : Comparable<DiscordVersion>, Parcelable {
     @Parcelize
+    data object Invalid : DiscordVersion
+
+    @Parcelize
     data object Error : DiscordVersion
 
     @Parcelize
@@ -31,6 +34,7 @@ sealed interface DiscordVersion : Comparable<DiscordVersion>, Parcelable {
         return when (this) {
             is Error -> 0
             is None -> 0
+            is Invalid -> 0
             is Existing -> {
                 if (other is Existing) {
                     other.typelessCode.compareTo(typelessCode)
@@ -44,6 +48,7 @@ sealed interface DiscordVersion : Comparable<DiscordVersion>, Parcelable {
     @Composable
     fun toDisplayName() = when (this) {
         is Error -> stringResource(R.string.version_load_fail)
+        is Invalid -> stringResource(R.string.invalid_version_code_format)
         is None -> stringResource(R.string.version_none)
         is Existing -> when (type) {
             Type.STABLE -> stringResource(R.string.version_stable)
@@ -61,6 +66,23 @@ sealed interface DiscordVersion : Comparable<DiscordVersion>, Parcelable {
     }
 
     companion object {
+        val DISCORD_VERSION_REGEX = Regex("""^\d{3}[0-2]\d{2}$""")
+
+        fun parseFromString(version: String): DiscordVersion {
+            if (!DISCORD_VERSION_REGEX.matches(version)) {
+                return Invalid
+            }
+
+            val versionCode = version.toInt()
+            val type = parseVersionType(versionCode)
+
+            return Existing(
+                type = type,
+                name = "${versionCode / 1000}.${versionCode % 100}",
+                code = versionCode,
+            )
+        }
+
         fun parseVersionType(versionCode: Int?): Type {
             return when (versionCode?.div(100)?.mod(10)) {
                 0 -> Type.STABLE
@@ -68,6 +90,10 @@ sealed interface DiscordVersion : Comparable<DiscordVersion>, Parcelable {
                 2 -> Type.ALPHA
                 else -> Type.UNKNOWN
             }
+        }
+
+        fun isValid(versionCode: String): Boolean {
+            return DISCORD_VERSION_REGEX.matches(versionCode)
         }
     }
 }
