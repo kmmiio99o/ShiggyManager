@@ -13,7 +13,7 @@ class DownloadWintryXposedStep : DownloadStep() {
     private val paths: PathManager by inject()
     private val wintryGithubService: WintryGithubService by inject()
 
-    override val localizedName = R.string.downloading_wintryxposed
+    override val localizedName = R.string.patch_step_dl_wtxposed
     override val targetFile get() = paths.cachedWintryXposed(targetVersion)
     override lateinit var targetUrl: String
 

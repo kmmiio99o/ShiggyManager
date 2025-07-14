@@ -34,6 +34,7 @@
   <string name="action_exit_anyways">Exit Anyways</string>
   <string name="action_open_info">Open Info</string>
   <string name="action_reset_default">Reset to default</string>
+  <string name="action_reinstall">Reinstall</string>
 
   <string name="permissions_grant_title">Grant Permissions</string>
   <string name="storage_permissions_grant_body">In order for Aliucord Manager to function, file permissions are required. Since shared data is stored in ~/Aliucord, permissions are required in order to access it.</string>
@@ -89,6 +90,8 @@
   <string name="version_alpha">Alpha</string>
   <string name="version_unknown">Unknown</string>
   <string name="version_load_fail">Failed to retrieve version</string>
+  <string name="version_invalid_code">Invalid version code format</string>
+
 
   <string name="installer_file_save_success">Saved to %s</string>
   <string name="installer_file_save_failed">Failed to save %s</string>
@@ -116,6 +119,7 @@
   <string name="install_group_patch">Patch APK</string>
   <string name="install_group_install">Install APK</string>
 
+  <string name="patch_step_fetch_rna">Fetching latest Discord info</string>
   <string name="patch_step_fetch_kt_version">Fetching target Discord version</string>
   <string name="patch_step_downgrade_check">Checking for newer installations</string>
   <string name="patch_step_restore_cache">Restoring from cache</string>
@@ -136,6 +140,12 @@
   <string name="patch_step_signing">Signing APK</string>
   <string name="patch_step_install">Installing APK</string>
   <string name="patch_step_cleanup">Cleaning up</string>
+
+  <string name="patch_step_dl_baseapk">Downloading base APK</string>
+  <string name="patch_step_dl_libapk">Downloading libs apk</string>
+  <string name="patch_step_dl_resapk">Downloading resources apk</string>
+  <string name="patch_step_inject_wintry">Injecting WintryXposed with LSPatch</string>
+  <string name="patch_step_dl_wtxposed">Downloading WintryXposed</string>
 
   <string name="status_queued">Queued</string>
   <string name="status_ongoing">Ongoing</string>
@@ -174,6 +184,10 @@
   <string name="patchopts_divider_basic">Basic</string>
   <string name="patchopts_divider_advanced">Advanced</string>
   <string name="patchopts_warning_invalid_iconopts">The selected icon options are invalid!</string>
+  <string name="patchopts_verchannel_title">Version channel</string>
+  <string name="patchopts_verchannel_desc">Select the release channel to install from, or choose \'Custom\' to enter a specific version code.</string>
+  <string name="patchopts_vercode_title">Custom Version Code</string>
+  <string name="patchopts_vercode_desc">Manually enter a Discord version code to fetch and install.</string>
 
   <string name="iconopts_screen_title">Icon Replacement</string>
   <string name="iconopts_variant_title_old_discord">Old Discord</string>
@@ -246,14 +260,4 @@
   <string name="fun_fact_11">There was an attempt to make Aliucord run on iOS…</string>
   <string name="fun_fact_12" translatable="false">veeeee 😭</string>
 
-  <string name="download_libs_apk">Download libs apk</string>
-  <string name="downloading_base_apk">Downloading base APK</string>
-  <string name="downloading_libs_apk">Downloading libs apk</string>
-  <string name="downloading_resources_apk">Downloading resources apk</string>
-  <string name="injecting_wintryxposed_with_lspatch">Injecting WintryXposed with LSPatch</string>
-  <string name="downloading_wintryxposed">Downloading WintryXposed</string>
-  <string name="version_code">Version Code</string>
-  <string name="fetching_latest_discord_info">Fetching latest Discord info</string>
-  <string name="invalid_version_code_format">Invalid version code format</string>
-  <string name="reinstall">Reinstall</string>
 </resources>

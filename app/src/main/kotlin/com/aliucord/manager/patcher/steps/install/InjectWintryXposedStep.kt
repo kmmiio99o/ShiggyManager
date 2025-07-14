@@ -16,7 +16,7 @@ import java.io.File
 
 class InjectWintryXposedStep : Step() {
     override val group: StepGroup = StepGroup.Install
-    override val localizedName: Int = R.string.injecting_wintryxposed_with_lspatch
+    override val localizedName: Int = R.string.patch_step_inject_wintry
 
     suspend fun patch(
         container: StepRunner,

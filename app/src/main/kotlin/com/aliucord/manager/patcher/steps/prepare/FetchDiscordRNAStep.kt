@@ -16,7 +16,7 @@ class FetchDiscordRNAStep(val options: PatchOptions) : Step(), KoinComponent {
     private val rnaTrackerService: RNATrackerService by inject()
 
     override val group: StepGroup = StepGroup.Prepare
-    override val localizedName: Int = R.string.fetching_latest_discord_info
+    override val localizedName: Int = R.string.patch_step_fetch_rna
 
     var targetVersion by Delegates.notNull<Int>()
         private set

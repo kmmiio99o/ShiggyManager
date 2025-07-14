@@ -251,9 +251,9 @@ fun PatchOptionsScreenContent(
             }
 
             SelectPatchOption(
-                icon = painterResource(R.drawable.ic_app_shortcut),
-                name = "Preferred version",
-                description = "Choose which release channel or input a custom version code to use for installation.",
+                icon = painterResource(R.drawable.ic_code),
+                name = stringResource(R.string.patchopts_verchannel_title),
+                description = stringResource(R.string.patchopts_verchannel_desc),
                 options = VersionPreference.entries.map { it.name },
                 selectedOption = versionPreference.name,
                 onOptionSelected = { selected ->
@@ -266,8 +266,8 @@ fun PatchOptionsScreenContent(
                 label = "Custom version code option visibility"
             ) {
                 TextPatchOption(
-                    name = "Custom version code",
-                    description = "Input a custom version code to use for installation.",
+                    name = stringResource(R.string.patchopts_vercode_title),
+                    description = stringResource(R.string.patchopts_vercode_desc),
                     value = customVersionCode,
                     valueIsError = customVersionCodeIsError,
                     valueIsDefault = customVersionCode == PatchOptions.Default.customVersionCode,

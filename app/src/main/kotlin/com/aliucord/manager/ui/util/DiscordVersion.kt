@@ -48,7 +48,7 @@ sealed interface DiscordVersion : Comparable<DiscordVersion>, Parcelable {
     @Composable
     fun toDisplayName() = when (this) {
         is Error -> stringResource(R.string.version_load_fail)
-        is Invalid -> stringResource(R.string.invalid_version_code_format)
+        is Invalid -> stringResource(R.string.version_invalid_code)
         is None -> stringResource(R.string.version_none)
         is Existing -> when (type) {
             Type.STABLE -> stringResource(R.string.version_stable)

@@ -11,5 +11,5 @@ class DownloadDiscordRNAResourcesStep : DownloadDiscordRNAStep() {
 
     override val targetUrl get() = "$BASE_URL/tracker/download/$version/config.xxhdpi"
     override val targetFile get() = paths.discordApkVersionCache(version).resolve("config.xxhdpi.apk")
-    override val localizedName = R.string.downloading_resources_apk
+    override val localizedName = R.string.patch_step_dl_resapk
 }

@@ -99,7 +99,7 @@ fun InstalledItemCard(
                 if (data.isUpToDate != false)
                     SegmentedButton(
                         icon = painterResource(R.drawable.ic_refresh),
-                        text = stringResource(R.string.reinstall),
+                        text = stringResource(R.string.action_reinstall),
                         onClick = onUpdate,
                     )
                 else {
