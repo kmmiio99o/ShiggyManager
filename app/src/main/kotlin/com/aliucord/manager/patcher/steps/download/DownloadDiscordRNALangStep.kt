@@ -12,5 +12,5 @@ class DownloadDiscordRNALangStep : DownloadDiscordRNAStep() {
     override val targetUrl get() = "$BASE_URL/tracker/download/$version/config.en"
     override val targetFile get() = paths.discordApkVersionCache(version).resolve("config.en.apk")
 
-    override val localizedName = R.string.patch_step_dl_libapk
+    override val localizedName = R.string.patch_step_dl_langapk
 }

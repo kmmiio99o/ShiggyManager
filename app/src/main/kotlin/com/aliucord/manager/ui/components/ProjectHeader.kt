@@ -51,7 +51,7 @@ fun ProjectHeader(
         Row(
             horizontalArrangement = Arrangement.Center,
         ) {
-            TextButton(onClick = { uriHandler.openUri("https://github.com/${BuildConfig.GITHUB_ORG}") }) {
+            TextButton(onClick = { uriHandler.openUri("https://github.com/${if (aliucord) "Aliucord" else BuildConfig.GITHUB_ORG}") }) {
                 Icon(
                     painter = painterResource(R.drawable.ic_account_github_white_24dp),
                     contentDescription = null,
@@ -60,7 +60,7 @@ fun ProjectHeader(
                 Text(text = stringResource(R.string.github))
             }
 
-            TextButton(onClick = { uriHandler.openUri("https://discord.gg/${BuildConfig.SUPPORT_SERVER}") }) {
+            TextButton(onClick = { uriHandler.openUri("https://discord.gg/${if (aliucord) "EsNDvBaHVU" else BuildConfig.SUPPORT_SERVER}") }) {
                 Icon(
                     painter = painterResource(R.drawable.ic_discord),
                     contentDescription = stringResource(R.string.support_server),
