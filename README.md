@@ -1,9 +1,9 @@
 <div align="center">
-    <img src=".github/assets/manager-preview.png" alt="Wintry Manager preview" />
+    <img src=".github/assets/wt-manager-preview.png" alt="Wintry Manager preview" />
     <h1>Wintry Manager</h1>
     <p>Install <a href="https://github.com/amsyarasyiq/wintry">Wintry</a> on your Android device! Based on Aliucord Manager.</p>
 
-[![Discord](https://img.shields.io/discord/811255666990907402?logo=discord&logoColor=white&style=for-the-badge&color=5865F2)](https://discord.gg/ybPB5tgD)
+[![Discord](https://img.shields.io/discord/1394286025026572310?logo=discord&logoColor=white&style=for-the-badge&color=5865F2)](https://discord.gg/ybPB5tgD)
 [![GitHub Stars](https://img.shields.io/github/stars/wtcord/wt-manager?logo=github&style=for-the-badge&color=ffd663)](https://github.com/wtcord/wt-manager/stargazers)
 [![Build Status](https://img.shields.io/github/actions/workflow/status/wtcord/wt-manager/build.yml?label=Build&logo=github&style=for-the-badge&branch=main)](https://nightly.link/wtcord/wt-manager/workflows/build/main/app.zip)
 ![GitHub Downloads](https://img.shields.io/github/downloads/wtcord/wt-manager/total?style=for-the-badge&logo=github)
