@@ -18,57 +18,77 @@ import com.valentinilk.shimmer.shimmer
 
 @Composable
 fun LeadContributor(
-    name: String,
-    roles: String,
-    username: String = name,
-    modifier: Modifier = Modifier,
+        name: String,
+        roles: String,
+        username: String = name,
+        modifier: Modifier = Modifier,
 ) {
     val uriHandler = LocalUriHandler.current
 
     Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(16.dp),
-        modifier = modifier
-            .clickable(
-                onClick = { uriHandler.openUri("https://github.com/$username") },
-                indication = ripple(bounded = false, radius = 90.dp),
-                interactionSource = remember(::MutableInteractionSource)
-            )
-            .widthIn(min = 100.dp)
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(16.dp),
+            modifier =
+                    modifier.clickable(
+                                    onClick = {
+                                        uriHandler.openUri("https://github.com/$username")
+                                    },
+                                    indication = ripple(bounded = false, radius = 90.dp),
+                                    interactionSource = remember(::MutableInteractionSource)
+                            )
+                            .widthIn(min = 100.dp)
     ) {
         SubcomposeAsyncImage(
-            model = "https://github.com/$username.png",
-            contentDescription = username,
-            error = {
-                Surface(
-                    content = {},
-                    tonalElevation = 2.dp,
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .shimmer(),
-                )
-            },
-            modifier = Modifier
-                .size(80.dp)
-                .clip(CircleShape),
+                model = "https://github.com/$username.png",
+                contentDescription = username,
+                error = {
+                    Surface(
+                            content = {},
+                            tonalElevation = 2.dp,
+                            modifier = Modifier.fillMaxSize().shimmer(),
+                    )
+                },
+                modifier = Modifier.size(80.dp).clip(CircleShape),
         )
 
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Text(
-                text = name,
-                style = MaterialTheme.typography.titleMedium.copy(
-                    fontSize = 18.sp
-                )
-            )
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            Text(text = name, style = MaterialTheme.typography.titleMedium.copy(fontSize = 18.sp))
 
-            Text(
-                text = roles,
-                style = MaterialTheme.typography.titleSmall.copy(
-                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
+            val roleParts = roles.split(Regex("\\s*-\\s*"), limit = 2)
+            if (roleParts.size == 2) {
+                // Render left and right parts on two separate lines, removing the dash
+                Text(
+                        text = roleParts[0],
+                        style =
+                                MaterialTheme.typography.titleSmall.copy(
+                                        color =
+                                                MaterialTheme.colorScheme.onSurface.copy(
+                                                        alpha = 0.6f
+                                                )
+                                )
                 )
-            )
+                Text(
+                        text = roleParts[1],
+                        style =
+                                MaterialTheme.typography.bodySmall.copy(
+                                        color =
+                                                MaterialTheme.colorScheme.onSurface.copy(
+                                                        alpha = 0.6f
+                                                )
+                                )
+                )
+            } else {
+                Text(
+                        text = roles,
+                        style =
+                                MaterialTheme.typography.titleSmall.copy(
+                                        color =
+                                                MaterialTheme.colorScheme.onSurface.copy(
+                                                        alpha = 0.6f
+                                                )
+                                )
+                )
+            }
         }
     }
 }

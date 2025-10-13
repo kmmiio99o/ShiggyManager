@@ -21,45 +21,44 @@ import androidx.core.graphics.drawable.toDrawable
 import com.aliucord.manager.ui.screens.patchopts.PatchOptions.IconReplacement
 import dev.shiggy.manager.R
 
-// Sizing information is obtained from here: https://medium.com/google-design/designing-adaptive-icons-515af294c783
+// Sizing information is obtained from here:
+// https://medium.com/google-design/designing-adaptive-icons-515af294c783
 
 @Composable
 fun discordIconDrawable(
-    backgroundColor: Color,
-    oldLogo: Boolean = false,
-    size: Dp = 24.dp,
+        backgroundColor: Color,
+        oldLogo: Boolean = false,
+        size: Dp = 24.dp,
 ): Drawable {
     val density = LocalDensity.current
     val context = LocalContext.current
-    val size = with(density) { size.roundToPx() }
+    val sizePx = with(density) { size.roundToPx() }
 
-    val drawable = remember(context, oldLogo) {
-        val drawableId = when (oldLogo) {
-            false -> R.drawable.ic_discord
-            true -> R.drawable.ic_discord_old
-        }
+    val drawable =
+            remember(context, oldLogo) {
+                val drawableId =
+                        when (oldLogo) {
+                            false -> R.drawable.ic_discord
+                            true -> R.drawable.ic_discord_old
+                        }
 
-        InsetDrawable(
-            /* drawable = */ ContextCompat.getDrawable(context, drawableId)!!,
-            /* inset = */ (size * .17f).toInt(),
-        ).apply {
-            setTint(Color.White.toArgb())
-        }
-    }
+                InsetDrawable(
+                                /* drawable = */ ContextCompat.getDrawable(context, drawableId)!!,
+                                /* inset = */ (sizePx * .17f).toInt(),
+                        )
+                        .apply { setTint(Color.White.toArgb()) }
+            }
 
-    val bitmap = remember(size) { createBitmap(size, size) }
-    DisposableEffect(size) {
-        onDispose {
-            bitmap.recycle()
-        }
-    }
+    val bitmap = remember(sizePx) { createBitmap(sizePx, sizePx) }
+    DisposableEffect(sizePx) { onDispose { bitmap.recycle() } }
 
     DisposableEffect(backgroundColor, bitmap, drawable) {
         bitmap.applyCanvas {
-            val paint = Paint().apply {
-                style = Paint.Style.FILL
-                setColor(backgroundColor.toArgb())
-            }
+            val paint =
+                    Paint().apply {
+                        style = Paint.Style.FILL
+                        setColor(backgroundColor.toArgb())
+                    }
             drawRect(Rect(0, 0, width, height), paint)
 
             drawable.setBounds(0, 0, width, height)
@@ -69,43 +68,36 @@ fun discordIconDrawable(
         onDispose {}
     }
 
-    return remember(context, bitmap) {
-        bitmap.toDrawable(context.resources)
-    }
+    return remember(context, bitmap) { bitmap.toDrawable(context.resources) }
 }
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun customIconDrawable(
-    foregroundIcon: ByteArray,
-    backgroundColor: Color = IconReplacement.BlurpleColor,
+        foregroundIcon: ByteArray,
+        backgroundColor: Color = IconReplacement.BlurpleColor,
 ): Drawable {
     val context = LocalContext.current
 
     return remember(context, foregroundIcon) {
-        val foregroundIconBitmap = BitmapFactory.decodeByteArray(foregroundIcon, 0, foregroundIcon.size)
+        val foregroundIconBitmap =
+                BitmapFactory.decodeByteArray(foregroundIcon, 0, foregroundIcon.size)
 
         AdaptiveIconDrawable(
-            /* backgroundDrawable = */ backgroundColor.toArgb().toDrawable(),
-            /* foregroundDrawable = */ foregroundIconBitmap.toDrawable(context.resources),
+                /* backgroundDrawable = */ backgroundColor.toArgb().toDrawable(),
+                /* foregroundDrawable = */ foregroundIconBitmap.toDrawable(context.resources),
         )
     }
 }
 
 @Composable
 fun Drawable(
-    drawable: Drawable,
-    modifier: Modifier = Modifier,
+        drawable: Drawable,
+        modifier: Modifier = Modifier,
 ) {
     AndroidView(
-        factory = { context ->
-            ImageView(context).apply {
-                setImageDrawable(drawable)
-            }
-        },
-        update = { imageView ->
-            imageView.setImageDrawable(drawable)
-        },
-        modifier = modifier,
+            factory = { context -> ImageView(context).apply { setImageDrawable(drawable) } },
+            update = { imageView -> imageView.setImageDrawable(drawable) },
+            modifier = modifier,
     )
 }

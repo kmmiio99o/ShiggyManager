@@ -2,13 +2,13 @@
   <string name="app_name">Shiggy Manager</string>
   <string name="app_description">A Discord mod built with simplicity and a seamless experience in mind.</string>
 
-  <string name="aliucord" translatable="false">Aliucord</string>
+  <string name="aliucord" translatable="false">ShiggyCord</string>
   <string name="discord" translatable="false">Discord</string>
   <string name="github" translatable="false">GitHub</string>
   <string name="support_server">Support Server</string>
   <string name="installer">Installer</string>
 
-  <string name="shiggy" translatable="false">Shiggy</string>
+  <string name="shiggy" translatable="false">Shiggy Manager</string>
   <string name="aliucord_description">A mod for the Discord Android App</string>
 
   <string name="action_cancel">Cancel</string>
@@ -65,7 +65,7 @@
 
   <string
     name="about_manager_credit_disclaimer_notice"
-  >This manager is a fork of the original Aliucord Manager project, adapted for use with Shiggy. All credit goes to the Aliucord team for their foundational work.</string>
+  >This manager is a fork of the original Aliucord Manager project, Which was a forked by wintry, and now rebranded as Shiggy Manager. Credit to the original project\'s maintainers for the foundational work; continued development and branding are by the Shiggy team.</string>
 
   <string name="theme_system">System</string>
   <string name="theme_dark">Dark</string>
@@ -85,8 +85,13 @@
   <string name="navigation_logs">Open logs</string>
   <string name="navigation_settings">Settings</string>
 
-  <string name="contributors_lead">Lead</string>
-  <string name="contributors">Contributors</string>
+  <string name="contributors_lead">Lead Developers</string>
+  <string name="lead_role_kettu">Kettu - Creator</string>
+  <string name="lead_role_shiggycord">ShiggyCord - Creator</string>
+  <string name="lead_role_bunny">Bunny - Creator</string>
+  <string name="role_creator_vendetta">Creator of Vendetta</string>
+  <string name="role_original_manager_creator">Original Manager Creator</string>
+  <string name="contributors">Other Developers</string>
   <string name="contributors_contributions">%s contributions</string>
 
   <string name="network_load_fail">Failed to load</string>
@@ -104,7 +109,6 @@
   <string name="version_unknown">Unknown</string>
   <string name="version_load_fail">Failed to retrieve version</string>
   <string name="version_invalid_code">Invalid version code format</string>
-
 
   <string name="installer_file_save_success">Saved to %s</string>
   <string name="installer_file_save_failed">Failed to save %s</string>
@@ -142,14 +146,14 @@
   <string name="patch_step_restore_cache">Restoring from cache</string>
   <string name="patch_step_dl_kt_apk">Downloading Discord APK</string>
   <string name="patch_step_dl_kotlin">Downloading Kotlin library</string>
-  <string name="patch_step_dl_injector">Downloading Aliucord Injector</string>
-  <string name="patch_step_dl_aliuhook">Downloading Aliuhook library</string>
+  <string name="patch_step_dl_injector">Downloading ShiggyCord Injector</string>
+  <string name="patch_step_dl_aliuhook">Downloading ShiggyHook library</string>
   <string name="patch_step_dl_smali">Downloading smali patches</string>
   <string name="patch_step_copy_deps">Copying dependencies</string>
   <string name="patch_step_patch_manifests">Patching APK manifest</string>
   <string name="patch_step_patch_icon">Patching app icon</string>
-  <string name="patch_step_add_injector">Adding Aliucord injector</string>
-  <string name="patch_step_add_aliuhook">Adding Aliuhook library</string>
+  <string name="patch_step_add_injector">Adding ShiggyCord injector</string>
+  <string name="patch_step_add_aliuhook">Adding ShiggyHook library</string>
   <string name="patch_step_patch_smali">Applying smali patches</string>
   <string name="patch_step_reorganize_dex">Adding .dex files to APK</string>
   <string name="patch_step_save_metadata">Store metadata</string>
@@ -211,7 +215,7 @@
   <string name="patchopts_divider_advanced">Advanced</string>
   <string name="patchopts_warning_invalid_iconopts">The selected icon options are invalid!</string>
   <string name="patchopts_verchannel_title">Version channel</string>
-  <string name="patchopts_verchannel_desc">Select the release channel to install from, or choose \'Custom\' to enter a specific version code.</string>
+  <string name="patchopts_verchannel_desc">Select the release channel to install from, or choose Custom to enter a specific version code.</string>
   <string name="patchopts_vercode_title">Custom Version Code</string>
   <string name="patchopts_vercode_desc">Manually enter a Discord version code to fetch and install.</string>
 
@@ -221,8 +225,8 @@
   <string name="iconopts_variant_title_color">Custom Color</string>
   <string name="iconopts_variant_title_image">Custom Image</string>
   <string name="iconopts_variant_desc_discord">Does not alter the original icon, instead only adding the missing monochrome icon to the APK.</string>
-  <string name="iconopts_variant_desc_aliucord">Changes the original icon color to Aliucord\'s branding.</string>
-  <string name="iconopts_variant_desc_Shiggy">Changes the original icon color to Shiggy\'s branding.</string>
+  <string name="iconopts_variant_desc_aliucord">Changes the original icon color to Shiggy\'s branding.</string>
+  <string name="iconopts_variant_desc_shiggy">Changes the original icon color to Shiggy\'s branding.</string>
   <string name="iconopts_variant_desc_color">Select a custom icon background color.</string>
   <string
     name="iconopts_variant_desc_image"
@@ -237,13 +241,13 @@
   <string name="iconopts_failed_image_too_big">Image size exceeds maximum of 256KiB</string>
   <string name="iconopts_btn_open_selection">Select Image</string>
   <string name="iconopts_btn_open_example_image">Example image</string>
+  <string name="iconopts_image_preview_none">No image selected</string>
+  <string name="iconopts_image_preview_desc">A full, uncropped preview of the selected image.</string>
+  <string name="iconopts_image_preview_title">Preview</string>
   <string name="iconopts_icon_preview_title">Icon Preview</string>
   <string
     name="iconopts_icon_preview_desc"
   >A preview of the selected options, cropped and scaled to show how the icon will appear on your device</string>
-  <string name="iconopts_image_preview_title">Preview</string>
-  <string name="iconopts_image_preview_desc">A full, uncropped preview of the selected image.</string>
-  <string name="iconopts_image_preview_none">No image selected</string>
 
   <string name="log_title">Log</string>
   <string name="log_section_install_info">Installation Info</string>
@@ -264,14 +268,14 @@
   <string name="notif_group_install_title">Active installation</string>
   <string name="notif_group_install_desc">Progress notifications sent during a minimized installation</string>
   <string name="notif_install_ready_title">Shiggy installation ready!</string>
-  <string name="notif_install_ready_desc">Click to install…</string>
+  <string name="notif_install_ready_desc">Click to install...</string>
   <string name="notif_install_fail_title">Shiggy failed to install</string>
-  <string name="notif_install_fail_desc">Click to view more info…</string>
+  <string name="notif_install_fail_desc">Click to view more info...</string>
 
   <string name="play_protect_warning_title">Play Protect</string>
   <string
     name="play_protect_warning_desc"
-  >Google Play Protect appears to be enabled on your device. It may attempt to interfere with a new installation due to the usage of a unique signing key. You can disable it in Play Protect\'s settings.\n\nIf it does show a warning dialog, press\n\"More Details\" -> \"Install anyway\"</string>
+  >Google Play Protect appears to be enabled on your device. It may attempt to interfere with a new installation due to the usage of a unique signing key. You can disable it in Play Protect\'s settings. If it does show a warning dialog, press &quot;More Details&quot; -&gt; &quot;Install anyway&quot;</string>
   <string name="play_protect_warning_ok">Continue</string>
   <string name="play_protect_warning_open_gpp">Open Play Protect</string>
   <string name="play_protect_warning_disable">Don\'t show this again</string>
@@ -280,17 +284,17 @@
   <string name="custom_component_picker_desc">A custom local version for a patching component (%s) has been found. Would you like to use it?</string>
 
   <string name="fun_fact_prefix">Fun Fact: %s</string>
-  <string name="fun_fact_1">Did you know that Google Play Protect is useless?</string>
-  <string name="fun_fact_2">Did you know Aliucord with 150+ plugins somehow runs better than Discord\'s new app?</string>
-  <string name="fun_fact_3">Did you know Aliucord has over 200 available plugins?</string>
-  <string name="fun_fact_4">i am in your walls</string>
-  <string name="fun_fact_5">Did you know AliucordRN spawned Enmity and Vendetta?</string>
-  <string name="fun_fact_6">Having issues? Visit the #support channel in our Discord!</string>
-  <string name="fun_fact_7">The IWillCrashYourDiscord plugin crashes your discord.</string>
-  <string name="fun_fact_8" translatable="false">\"@Vendicated my bad.\"</string>
-  <string name="fun_fact_9">Aliucord can run on WearOS</string>
-  <string name="fun_fact_10">Aliucord uses the *real* old UI, from mid-2022!</string>
-  <string name="fun_fact_11">There was an attempt to make Aliucord run on iOS…</string>
-  <string name="fun_fact_12" translatable="false">veeeee 😭</string>
+  <string name="fun_fact_1">ShiggyCord on first release was meant to be custom Kettu build!</string>
+  <string name="fun_fact_2">The refreshed UI inside the settings was made from developer boredom</string>
+  <string name="fun_fact_3">ShiggyCord as first vendetta like client used to show users the built in plugins and even add extra ones!</string>
+  <string name="fun_fact_4">You love boys, don\'t you?</string>
+  <string name="fun_fact_5">Aliucord is the best client with old discord UI</string>
+  <string name="fun_fact_6">We love you cocobo and pylix!</string>
+  <string name="fun_fact_7">The Vendetta react native part was a total dogshit</string>
+  <string name="fun_fact_8">Vencord and Equicord are not the same.</string>
+  <string name="fun_fact_9">This client can be run on a android TV!</string>
+  <string name="fun_fact_10">The Main Developer one and half a year ago didn\'t even know how to code</string>
+  <string name="fun_fact_11">This client does not support iOS!</string>
+  <string name="fun_fact_12">Boom!</string>
 
 </resources>

@@ -10,7 +10,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -89,7 +88,7 @@ fun AboutScreenContent(state: State<AboutScreenState>) {
                 }
             }
 
-            item(key = "PROJECT_HEADER") { ProjectHeader(aliucord = true) }
+            item(key = "PROJECT_HEADER") { ProjectHeader() }
 
             item(key = "HEADER_DIVIDER") {
                 TextDivider(
@@ -104,9 +103,9 @@ fun AboutScreenContent(state: State<AboutScreenState>) {
                         verticalAlignment = Alignment.CenterVertically,
                         modifier = Modifier.fillMaxWidth(),
                 ) {
-                    LeadContributor("C0C0B01", "Creator of Kettu")
-                    LeadContributor("kmmiio99o", "Creator of ShiggyCord")
-                    LeadContributor("pylixonly", "Creator of Bunny")
+                    LeadContributor("C0C0B01", stringResource(R.string.lead_role_kettu))
+                    LeadContributor("kmmiio99o", stringResource(R.string.lead_role_shiggycord))
+                    LeadContributor("pylixonly", stringResource(R.string.lead_role_bunny))
                 }
             }
 
@@ -131,8 +130,16 @@ fun AboutScreenContent(state: State<AboutScreenState>) {
                             LoadFailure(modifier = Modifier.fillMaxSize().padding(vertical = 38.dp))
                         }
                 is AboutScreenState.Loaded -> {
-                    items(state.contributors, key = { it.username }) { user ->
-                        ContributorCommitsItem(user)
+                    // Render the two requested contributors as LeadContributor entries
+                    item(key = "SELECTED_CONTRIBUTORS") {
+                        Row(
+                                horizontalArrangement = Arrangement.SpaceEvenly,
+                                verticalAlignment = Alignment.CenterVertically,
+                                modifier = Modifier.fillMaxWidth(),
+                        ) {
+                            LeadContributor("maisymoe", "Creator - Vendetta")
+                            LeadContributor("rushiiMachine", "Manager - Creator")
+                        }
                     }
                 }
             }
