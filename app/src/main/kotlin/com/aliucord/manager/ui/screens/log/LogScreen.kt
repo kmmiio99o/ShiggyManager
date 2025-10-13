@@ -18,7 +18,7 @@ import com.aliucord.manager.ui.components.Label
 import com.aliucord.manager.ui.screens.log.components.LogAppBar
 import com.aliucord.manager.ui.screens.log.components.LogTextArea
 import com.aliucord.manager.util.back
-import dev.wintry.manager.R
+import dev.shiggy.manager.R
 import kotlinx.parcelize.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize
 import org.koin.core.parameter.parametersOf

@@ -21,7 +21,7 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.aliucord.manager.ui.screens.plugins.model.PluginItem
-import dev.wintry.manager.R
+import dev.shiggy.manager.R
 
 private val hyperLinkPattern = Regex("\\[(.+?)]\\((.+?\\))")
 

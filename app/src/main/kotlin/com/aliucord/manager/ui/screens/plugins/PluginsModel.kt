@@ -12,8 +12,8 @@ import com.aliucord.manager.ui.util.emptyImmutableList
 import com.aliucord.manager.ui.util.toUnsafeImmutable
 import com.aliucord.manager.util.*
 import com.github.diamondminer88.zip.ZipReader
-import dev.wintry.manager.BuildConfig
-import dev.wintry.manager.R
+import dev.shiggy.manager.BuildConfig
+import dev.shiggy.manager.R
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*

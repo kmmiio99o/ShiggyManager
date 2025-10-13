@@ -9,7 +9,7 @@ import com.aliucord.manager.patcher.StepRunner
 import com.aliucord.manager.patcher.steps.StepGroup
 import com.aliucord.manager.patcher.steps.base.Step
 import com.aliucord.manager.patcher.util.InsufficientStorageException
-import dev.wintry.manager.R
+import dev.shiggy.manager.R
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import java.io.File

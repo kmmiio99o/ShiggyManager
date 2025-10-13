@@ -1,7 +1,7 @@
 package com.aliucord.manager.di
 
 import android.app.Application
-import dev.wintry.manager.BuildConfig
+import dev.shiggy.manager.BuildConfig
 import io.ktor.client.HttpClient
 import io.ktor.client.call.HttpClientCall
 import io.ktor.client.engine.okhttp.OkHttp

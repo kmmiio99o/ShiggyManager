@@ -9,7 +9,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.aliucord.manager.ui.util.mirrorVertically
-import dev.wintry.manager.R
+import dev.shiggy.manager.R
 
 @Composable
 fun ResetToDefaultButton(

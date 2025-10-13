@@ -24,7 +24,7 @@ import com.aliucord.manager.ui.screens.home.HomeScreen
 import com.aliucord.manager.ui.theme.ManagerTheme
 import com.aliucord.manager.ui.widgets.updater.UpdaterDialog
 import com.aliucord.manager.util.back
-import dev.wintry.manager.BuildConfig
+import dev.shiggy.manager.BuildConfig
 import org.koin.android.ext.android.inject
 
 class MainActivity : ComponentActivity() {

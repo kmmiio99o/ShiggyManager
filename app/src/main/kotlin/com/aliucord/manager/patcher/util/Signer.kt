@@ -7,7 +7,7 @@ package com.aliucord.manager.patcher.util
 
 import com.aliucord.manager.manager.PathManager
 import com.android.apksig.ApkSigner
-import dev.wintry.manager.BuildConfig
+import dev.shiggy.manager.BuildConfig
 import org.bouncycastle.asn1.x500.X500Name
 import org.bouncycastle.asn1.x509.SubjectPublicKeyInfo
 import org.bouncycastle.cert.X509v3CertificateBuilder
@@ -32,7 +32,7 @@ object Signer : KoinComponent {
 
         // Create new keystore if it doesn't exist
         if (!paths.keystoreFile.exists()) {
-            paths.wintryDir.mkdirs()
+            paths.shiggyDir.mkdirs()
             newKeystore(paths.keystoreFile)
         }
 

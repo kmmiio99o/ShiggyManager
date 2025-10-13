@@ -8,7 +8,7 @@ import com.aliucord.manager.patcher.steps.base.Step
 import com.aliucord.manager.patcher.steps.download.CopyDependenciesStep
 import com.aliucord.manager.patcher.steps.download.DownloadAliuhookStep
 import com.github.diamondminer88.zip.*
-import dev.wintry.manager.R
+import dev.shiggy.manager.R
 import org.koin.core.component.KoinComponent
 
 /**

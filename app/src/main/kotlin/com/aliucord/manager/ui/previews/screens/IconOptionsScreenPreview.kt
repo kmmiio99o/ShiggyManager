@@ -14,7 +14,7 @@ import com.aliucord.manager.ui.screens.iconopts.IconOptionsMode
 import com.aliucord.manager.ui.screens.iconopts.IconOptionsScreenContent
 import com.aliucord.manager.ui.screens.patchopts.PatchOptions.IconReplacement
 import com.aliucord.manager.ui.theme.ManagerTheme
-import dev.wintry.manager.R
+import dev.shiggy.manager.R
 import dev.zt64.compose.pipette.HsvColor
 import java.io.ByteArrayOutputStream
 

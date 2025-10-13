@@ -150,7 +150,7 @@ object ManifestPatcher {
                                                 "name",
                                                 android.R.attr.name,
                                                 TYPE_STRING,
-                                                "isWintry" /* originally "isAliucord" */
+                                                "isShiggy" /* originally "isAliucord" */
                                             )
                                             attr(ANDROID_NAMESPACE, "value", android.R.attr.value, TYPE_INT_BOOLEAN, 1)
                                         }

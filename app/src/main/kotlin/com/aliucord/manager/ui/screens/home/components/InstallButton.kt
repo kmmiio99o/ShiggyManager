@@ -14,7 +14,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.aliucord.manager.ui.util.thenIf
 import com.valentinilk.shimmer.*
-import dev.wintry.manager.R
+import dev.shiggy.manager.R
 
 private val shimmerTheme = defaultShimmerTheme.copy(
     shimmerWidth = 150.dp,

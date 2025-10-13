@@ -10,8 +10,8 @@ import cafe.adriel.voyager.core.model.screenModelScope
 import com.aliucord.manager.manager.InstallLogData
 import com.aliucord.manager.manager.InstallLogManager
 import com.aliucord.manager.util.*
-import dev.wintry.manager.BuildConfig
-import dev.wintry.manager.R
+import dev.shiggy.manager.BuildConfig
+import dev.shiggy.manager.R
 
 class LogScreenModel(
     private val installId: String,

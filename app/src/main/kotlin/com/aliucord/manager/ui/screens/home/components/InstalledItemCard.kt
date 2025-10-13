@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.dp
 import com.aliucord.manager.ui.components.SegmentedButton
 import com.aliucord.manager.ui.components.VersionDisplay
 import com.aliucord.manager.ui.screens.home.InstallData
-import dev.wintry.manager.R
+import dev.shiggy.manager.R
 
 @Composable
 fun InstalledItemCard(
@@ -88,7 +88,7 @@ fun InstalledItemCard(
                 horizontalArrangement = Arrangement.spacedBy(2.dp),
                 modifier = Modifier.clip(MaterialTheme.shapes.large),
             ) {
-                // // Plugins cannot be managed externally yet in Wintry
+                // // Plugins cannot be managed externally yet in Shiggy
                 // SegmentedButton(
                 //     icon = painterResource(R.drawable.ic_extension),
                 //     text = stringResource(R.string.plugins_title),

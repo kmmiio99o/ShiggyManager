@@ -9,8 +9,8 @@ import androidx.core.content.getSystemService
 import androidx.core.net.toUri
 import com.aliucord.manager.manager.download.IDownloadManager.ProgressListener
 import com.aliucord.manager.manager.download.IDownloadManager.Result
-import dev.wintry.manager.BuildConfig
-import dev.wintry.manager.R
+import dev.shiggy.manager.BuildConfig
+import dev.shiggy.manager.R
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import java.io.File

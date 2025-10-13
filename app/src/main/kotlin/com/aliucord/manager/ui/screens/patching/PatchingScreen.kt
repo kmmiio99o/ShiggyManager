@@ -40,8 +40,8 @@ import com.aliucord.manager.ui.util.spacedByLastAtBottom
 import com.aliucord.manager.ui.util.thenIf
 import com.aliucord.manager.util.back
 import com.aliucord.manager.util.isIgnoringBatteryOptimizations
-import dev.wintry.manager.BuildConfig
-import dev.wintry.manager.R
+import dev.shiggy.manager.BuildConfig
+import dev.shiggy.manager.R
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.coroutines.flow.filter
 import kotlinx.parcelize.IgnoredOnParcel

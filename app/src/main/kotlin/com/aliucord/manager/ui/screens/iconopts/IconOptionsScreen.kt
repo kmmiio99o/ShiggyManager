@@ -41,7 +41,7 @@ import com.aliucord.manager.ui.screens.patchopts.PatchOptionsScreen
 import com.aliucord.manager.ui.util.ColorSaver
 import com.aliucord.manager.ui.util.throttledState
 import com.aliucord.manager.util.back
-import dev.wintry.manager.R
+import dev.shiggy.manager.R
 import dev.zt64.compose.pipette.CircularColorPicker
 import dev.zt64.compose.pipette.HsvColor
 import kotlinx.parcelize.IgnoredOnParcel
@@ -120,10 +120,10 @@ fun IconOptionsScreenContent(
                 onClick = remember { { setMode(IconOptionsMode.OldDiscord) } },
             )
             RadioSelectorItem(
-                name = stringResource(R.string.wintry),
-                description = stringResource(R.string.iconopts_variant_desc_wintry),
-                selected = mode == IconOptionsMode.Wintry,
-                onClick = remember { { setMode(IconOptionsMode.Wintry) } },
+                name = stringResource(R.string.shiggy),
+                description = stringResource(R.string.iconopts_variant_desc_shiggy),
+                selected = mode == IconOptionsMode.Shiggy,
+                onClick = remember { { setMode(IconOptionsMode.Shiggy) } },
             )
             RadioSelectorItem(
                 name = stringResource(R.string.aliucord),
@@ -220,7 +220,7 @@ private fun IconPreview(
                     IconOptionsMode.Original -> PatchOptions.IconReplacement.BlurpleColor
                     IconOptionsMode.OldDiscord -> PatchOptions.IconReplacement.OldBlurpleColor
                     IconOptionsMode.Aliucord -> PatchOptions.IconReplacement.AliucordColor
-                    IconOptionsMode.Wintry -> PatchOptions.IconReplacement.WintryColor
+                    IconOptionsMode.Shiggy -> PatchOptions.IconReplacement.ShiggyColor
                     IconOptionsMode.CustomColor -> selectedColor.toColor()
                     IconOptionsMode.CustomImage -> error("unreachable")
                 }

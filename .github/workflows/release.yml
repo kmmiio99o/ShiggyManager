@@ -51,7 +51,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           tag="${{ github.ref_name }}"
-          apk_file="wintry-manager-$tag.apk"
+          apk_file="shiggy-manager-$tag.apk"
           mv -T ./app/build/outputs/apk/release/app-release.apk "./$apk_file"
 
           gh release create "$tag" \

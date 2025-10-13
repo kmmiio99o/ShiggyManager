@@ -4,7 +4,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import dev.wintry.manager.R
+import dev.shiggy.manager.R
 
 @Composable
 fun PatchingAppBar(

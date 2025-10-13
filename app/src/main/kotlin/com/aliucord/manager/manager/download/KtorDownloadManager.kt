@@ -9,7 +9,7 @@ import androidx.core.content.getSystemService
 import com.aliucord.manager.manager.download.IDownloadManager.Result
 import com.aliucord.manager.patcher.util.InsufficientStorageException
 import com.aliucord.manager.util.IS_PROBABLY_EMULATOR
-import dev.wintry.manager.R
+import dev.shiggy.manager.R
 import io.ktor.client.HttpClient
 import io.ktor.client.request.header
 import io.ktor.client.request.prepareGet

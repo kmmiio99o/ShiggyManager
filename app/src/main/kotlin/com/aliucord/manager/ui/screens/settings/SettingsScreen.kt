@@ -24,7 +24,7 @@ import com.aliucord.manager.ui.components.BackButton
 import com.aliucord.manager.ui.components.MainActionButton
 import com.aliucord.manager.ui.components.settings.*
 import com.aliucord.manager.ui.screens.settings.components.ThemeDialog
-import dev.wintry.manager.R
+import dev.shiggy.manager.R
 import kotlinx.parcelize.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize
 

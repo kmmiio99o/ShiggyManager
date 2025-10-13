@@ -6,12 +6,10 @@ import io.ktor.client.request.header
 import io.ktor.client.request.url
 import io.ktor.http.HttpHeaders
 
-class WintryGithubService(
-    private val http: HttpService,
+class ShiggyGithubService(
+        private val http: HttpService,
 ) {
-    /**
-     * Fetches all the Manager releases with a 60s local cache.
-     */
+    /** Fetches all the Manager releases with a 60s local cache. */
     suspend fun getManagerReleases(): ApiResponse<List<GithubRelease>> {
         return http.request {
             url("https://api.github.com/repos/$ORG/$MANAGER_REPO/releases")
@@ -19,9 +17,7 @@ class WintryGithubService(
         }
     }
 
-    /**
-     * Fetches the latest Xposed release with a 60s local cache.
-     */
+    /** Fetches the latest Xposed release with a 60s local cache. */
     suspend fun getLatestXposedRelease(): ApiResponse<GithubRelease> {
         return http.request {
             url("https://api.github.com/repos/$ORG/$XPOSED_REPO/releases/latest")
@@ -30,8 +26,8 @@ class WintryGithubService(
     }
 
     companion object {
-        const val ORG = "wtcord"
-        const val MANAGER_REPO = "wt-manager"
-        const val XPOSED_REPO = "wt-xposed"
+        const val ORG = "kmmiio99o"
+        const val MANAGER_REPO = "ShiggyManager"
+        const val XPOSED_REPO = "ShiggyXposed"
     }
 }

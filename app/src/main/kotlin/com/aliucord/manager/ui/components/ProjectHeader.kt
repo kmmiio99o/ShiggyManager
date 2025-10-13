@@ -12,8 +12,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import dev.wintry.manager.BuildConfig
-import dev.wintry.manager.R
+import dev.shiggy.manager.BuildConfig
+import dev.shiggy.manager.R
 
 @Composable
 fun ProjectHeader(
@@ -28,7 +28,7 @@ fun ProjectHeader(
         modifier = modifier,
     ) {
         Image(
-            painter = painterResource(if (aliucord) R.drawable.ic_aliucord_logo else R.drawable.ic_rounded_wintry),
+            painter = painterResource(if (aliucord) R.drawable.ic_aliucord_logo else R.drawable.ic_rounded_shiggy),
             contentDescription = null,
             modifier = Modifier
                 .padding(bottom = 6.dp)
@@ -36,7 +36,7 @@ fun ProjectHeader(
         )
 
         Text(
-            text = stringResource(if (aliucord) R.string.aliucord else R.string.wintry),
+            text = stringResource(if (aliucord) R.string.aliucord else R.string.shiggy),
             style = MaterialTheme.typography.titleMedium.copy(fontSize = 26.sp)
         )
 

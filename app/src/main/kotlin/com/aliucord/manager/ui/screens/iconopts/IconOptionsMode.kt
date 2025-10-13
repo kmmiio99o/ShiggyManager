@@ -6,7 +6,7 @@ import androidx.compose.runtime.Immutable
 enum class IconOptionsMode {
     Original,
     OldDiscord,
-    Wintry,
+    Shiggy,
     Aliucord,
     CustomColor,
     CustomImage,

@@ -22,7 +22,7 @@ import com.aliucord.manager.ui.screens.plugins.components.*
 import com.aliucord.manager.ui.screens.plugins.components.dialogs.UninstallPluginDialog
 import com.aliucord.manager.ui.screens.plugins.model.PluginItem
 import com.aliucord.manager.ui.util.paddings.*
-import dev.wintry.manager.R
+import dev.shiggy.manager.R
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.parcelize.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize

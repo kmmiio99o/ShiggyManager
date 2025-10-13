@@ -11,7 +11,7 @@ import androidx.core.content.getSystemService
 import com.aliucord.manager.ui.screens.patchopts.PatchOptions
 import com.aliucord.manager.util.IS_PROBABLY_EMULATOR
 import com.aliucord.manager.util.isPlayProtectEnabled
-import dev.wintry.manager.BuildConfig
+import dev.shiggy.manager.BuildConfig
 import kotlinx.serialization.*
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.decodeFromStream

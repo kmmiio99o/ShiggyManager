@@ -18,10 +18,10 @@ class PathManager(
     val aliucordDir = Environment.getExternalStorageDirectory().resolve("Aliucord")
 
     /**
-     * The Wintry folder where shared Wintry files are stored.
-     * Standard path: `~/Wintry`
+     * The Shiggy folder where shared Shiggy files are stored.
+     * Standard path: `~/Shiggy`
      */
-    val wintryDir = Environment.getExternalStorageDirectory().resolve("Wintry")
+    val shiggyDir = Environment.getExternalStorageDirectory().resolve("Shiggy")
 
     /**
      * The directory in external storage in which plugins are stored by Aliucord.
@@ -36,7 +36,7 @@ class PathManager(
     /**
      * Global keystore used for signing APKs.
      */
-    val keystoreFile = wintryDir.resolve("ks.keystore")
+    val keystoreFile = shiggyDir.resolve("ks.keystore")
 
     /**
      * The internal directory used for downloading components related to patching, and
@@ -122,7 +122,7 @@ class PathManager(
     fun cachedKotlinDex() = patchingDownloadDir
         .resolve("kotlin.dex")
 
-    fun cachedWintryXposed(version: SemVer) = patchingDownloadDir
+    fun cachedShiggyXposed(version: SemVer) = patchingDownloadDir
         .resolve("wt-xposed")
         .resolve("$version.apk")
 

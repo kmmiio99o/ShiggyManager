@@ -4,9 +4,9 @@ import com.aliucord.manager.patcher.StepRunner
 import com.aliucord.manager.patcher.steps.StepGroup
 import com.aliucord.manager.patcher.steps.base.Step
 import com.aliucord.manager.patcher.steps.download.CopyDependenciesStep
-import com.aliucord.manager.patcher.steps.download.DownloadWintryXposedStep
+import com.aliucord.manager.patcher.steps.download.DownloadShiggyXposedStep
 import com.aliucord.manager.patcher.util.Signer
-import dev.wintry.manager.R
+import dev.shiggy.manager.R
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.lsposed.lspatch.share.LSPConfig
@@ -14,9 +14,9 @@ import org.lsposed.patch.LSPatch
 import org.lsposed.patch.util.Logger
 import java.io.File
 
-class InjectWintryXposedStep : Step() {
+class InjectShiggyXposedStep : Step() {
     override val group: StepGroup = StepGroup.Install
-    override val localizedName: Int = R.string.patch_step_inject_wintry
+    override val localizedName: Int = R.string.patch_step_inject_shiggy
 
     suspend fun patch(
         container: StepRunner,
@@ -58,10 +58,10 @@ class InjectWintryXposedStep : Step() {
 
     override suspend fun execute(container: StepRunner) {
         val apks = container.getStep<CopyDependenciesStep>().patchedApks
-        val xposed = container.getStep<DownloadWintryXposedStep>().targetFile
+        val xposed = container.getStep<DownloadShiggyXposedStep>().targetFile
 
-        container.log("Adding WintryXposed module with LSPatch")
-        container.log("WintryXposed path = ${xposed.absolutePath}")
+        container.log("Adding ShiggyXposed module with LSPatch")
+        container.log("ShiggyXposed path = ${xposed.absolutePath}")
 
         // Create temporary folder in working directory
         val tempDir = apks.first().parentFile!!.resolve("lspatched")

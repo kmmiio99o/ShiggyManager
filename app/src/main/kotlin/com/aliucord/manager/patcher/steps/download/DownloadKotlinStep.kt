@@ -5,7 +5,7 @@ import com.aliucord.manager.manager.PathManager
 import com.aliucord.manager.patcher.steps.base.DownloadStep
 import com.aliucord.manager.patcher.steps.base.IDexProvider
 import com.aliucord.manager.patcher.steps.patch.ReorganizeDexStep
-import dev.wintry.manager.R
+import dev.shiggy.manager.R
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 

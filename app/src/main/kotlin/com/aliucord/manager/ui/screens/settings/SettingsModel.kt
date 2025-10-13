@@ -8,8 +8,8 @@ import com.aliucord.manager.manager.PathManager
 import com.aliucord.manager.manager.PreferencesManager
 import com.aliucord.manager.ui.theme.Theme
 import com.aliucord.manager.util.*
-import dev.wintry.manager.BuildConfig
-import dev.wintry.manager.R
+import dev.shiggy.manager.BuildConfig
+import dev.shiggy.manager.R
 
 class SettingsModel(
     private val application: Application,
@@ -55,7 +55,7 @@ class SettingsModel(
     }
 
     fun shareApk() {
-        // TODO(Wintry): Implement this
+        // TODO(Shiggy): Implement this
         application.showToast(R.string.settings_export_apk_not_implemented)
         // val file = paths.patchingWorkingDir().resolve("patched.apk")
         // val fileUri = FileProvider.getUriForFile(

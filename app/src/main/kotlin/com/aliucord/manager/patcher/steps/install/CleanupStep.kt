@@ -5,7 +5,7 @@ import com.aliucord.manager.manager.PreferencesManager
 import com.aliucord.manager.patcher.StepRunner
 import com.aliucord.manager.patcher.steps.StepGroup
 import com.aliucord.manager.patcher.steps.base.Step
-import dev.wintry.manager.R
+import dev.shiggy.manager.R
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 

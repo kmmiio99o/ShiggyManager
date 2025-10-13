@@ -12,8 +12,8 @@ import androidx.core.app.*
 import androidx.core.content.ContextCompat
 import com.aliucord.manager.MainActivity
 import com.aliucord.manager.util.findActivity
-import dev.wintry.manager.BuildConfig
-import dev.wintry.manager.R
+import dev.shiggy.manager.BuildConfig
+import dev.shiggy.manager.R
 
 object InstallNotifications {
     private const val CHANNEL_ID = "installation"

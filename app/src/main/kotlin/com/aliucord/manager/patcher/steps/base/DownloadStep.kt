@@ -10,7 +10,7 @@ import com.aliucord.manager.manager.download.KtorDownloadManager
 import com.aliucord.manager.patcher.StepRunner
 import com.aliucord.manager.patcher.steps.StepGroup
 import com.aliucord.manager.util.*
-import dev.wintry.manager.R
+import dev.shiggy.manager.R
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.koin.core.component.KoinComponent

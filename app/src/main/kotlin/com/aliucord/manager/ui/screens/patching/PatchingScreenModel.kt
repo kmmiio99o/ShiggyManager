@@ -9,7 +9,7 @@ import cafe.adriel.voyager.core.model.StateScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
 import com.aliucord.manager.manager.*
 import com.aliucord.manager.patcher.StepRunner
-import com.aliucord.manager.patcher.WintryPatchRunner
+import com.aliucord.manager.patcher.ShiggyPatchRunner
 import com.aliucord.manager.patcher.steps.StepGroup
 import com.aliucord.manager.patcher.steps.base.*
 import com.aliucord.manager.patcher.steps.install.InstallStep
@@ -17,8 +17,8 @@ import com.aliucord.manager.patcher.util.InsufficientStorageException
 import com.aliucord.manager.ui.screens.patchopts.PatchOptions
 import com.aliucord.manager.ui.util.toUnsafeImmutable
 import com.aliucord.manager.util.*
-import dev.wintry.manager.BuildConfig
-import dev.wintry.manager.R
+import dev.shiggy.manager.BuildConfig
+import dev.shiggy.manager.R
 import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.ImmutableMap
 import kotlinx.coroutines.*
@@ -125,7 +125,7 @@ class PatchingScreenModel(
     }
 
     private suspend fun startPatchRunner() {
-        val runner = WintryPatchRunner(options)
+        val runner = ShiggyPatchRunner(options)
             .also { stepRunner = it }
 
         val newSteps = runner.steps.groupBy { it.group }

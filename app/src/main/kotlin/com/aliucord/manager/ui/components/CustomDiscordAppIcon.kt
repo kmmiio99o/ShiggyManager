@@ -19,7 +19,7 @@ import androidx.core.graphics.applyCanvas
 import androidx.core.graphics.createBitmap
 import androidx.core.graphics.drawable.toDrawable
 import com.aliucord.manager.ui.screens.patchopts.PatchOptions.IconReplacement
-import dev.wintry.manager.R
+import dev.shiggy.manager.R
 
 // Sizing information is obtained from here: https://medium.com/google-design/designing-adaptive-icons-515af294c783
 

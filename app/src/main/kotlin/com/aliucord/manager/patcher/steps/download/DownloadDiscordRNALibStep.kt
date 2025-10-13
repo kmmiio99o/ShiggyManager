@@ -4,7 +4,7 @@ import android.os.Build
 import com.aliucord.manager.manager.PathManager
 import com.aliucord.manager.network.services.RNATrackerService.Companion.BASE_URL
 import com.aliucord.manager.patcher.steps.base.DownloadDiscordRNAStep
-import dev.wintry.manager.R
+import dev.shiggy.manager.R
 import org.koin.core.component.inject
 
 class DownloadDiscordRNALibStep : DownloadDiscordRNAStep() {

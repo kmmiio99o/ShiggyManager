@@ -4,7 +4,7 @@ import android.os.Parcelable
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.res.stringResource
-import dev.wintry.manager.R
+import dev.shiggy.manager.R
 import kotlinx.parcelize.Parcelize
 
 @Parcelize

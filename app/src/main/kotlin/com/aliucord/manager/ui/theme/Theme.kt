@@ -14,7 +14,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
-import dev.wintry.manager.R
+import dev.shiggy.manager.R
 
 @Composable
 fun ManagerTheme(

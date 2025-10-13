@@ -8,8 +8,8 @@ import com.aliucord.manager.patcher.steps.base.Step
 import com.aliucord.manager.patcher.steps.download.*
 import com.aliucord.manager.ui.screens.patchopts.PatchOptions
 import com.github.diamondminer88.zip.ZipWriter
-import dev.wintry.manager.BuildConfig
-import dev.wintry.manager.R
+import dev.shiggy.manager.BuildConfig
+import dev.shiggy.manager.R
 import kotlinx.serialization.json.Json
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -31,7 +31,7 @@ class SaveMetadataStep(private val options: PatchOptions) : Step(), KoinComponen
         val aliuhook = container.getStepOrNull<DownloadAliuhookStep>()
         val injector = container.getStepOrNull<DownloadInjectorStep>()
         val patches = container.getStepOrNull<DownloadPatchesStep>()
-        val wintryXposed = container.getStepOrNull<DownloadWintryXposedStep>()
+        val shiggyXposed = container.getStepOrNull<DownloadShiggyXposedStep>()
 
         val metadata = InstallMetadata(
             options = options,
@@ -41,12 +41,12 @@ class SaveMetadataStep(private val options: PatchOptions) : Step(), KoinComponen
             injectorVersion = injector?.targetVersion,
             patchesVersion = patches?.targetVersion,
             lspatchVersion = LSPConfig.instance.VERSION_CODE,
-            wintryXposedVersion = wintryXposed?.targetVersion,
+            shiggyXposedVersion = shiggyXposed?.targetVersion,
         )
 
         container.log("Writing serialized install metadata to APK")
         ZipWriter(apk, /* append = */ true).use {
-            it.writeEntry("wintry.json", json.encodeToString<InstallMetadata>(metadata))
+            it.writeEntry("shiggy.json", json.encodeToString<InstallMetadata>(metadata))
         }
     }
 }

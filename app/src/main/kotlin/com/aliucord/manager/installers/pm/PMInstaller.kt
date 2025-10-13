@@ -11,7 +11,7 @@ import android.util.Log
 import androidx.core.content.ContextCompat
 import com.aliucord.manager.installers.Installer
 import com.aliucord.manager.util.isMiui
-import dev.wintry.manager.BuildConfig
+import dev.shiggy.manager.BuildConfig
 import kotlinx.coroutines.suspendCancellableCoroutine
 import java.io.File
 import kotlin.coroutines.resume

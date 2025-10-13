@@ -10,8 +10,8 @@ import cafe.adriel.voyager.core.model.ScreenModel
 import cafe.adriel.voyager.core.model.screenModelScope
 import com.aliucord.manager.ui.screens.patchopts.PatchOptions.IconReplacement
 import com.aliucord.manager.util.*
-import dev.wintry.manager.BuildConfig
-import dev.wintry.manager.R
+import dev.shiggy.manager.BuildConfig
+import dev.shiggy.manager.R
 import dev.zt64.compose.pipette.HsvColor
 import java.io.IOException
 
@@ -74,9 +74,9 @@ class IconOptionsModel(
     // ---------- Other ---------- //
     init {
         when (prefilledOptions) {
-            is IconReplacement.CustomColor if prefilledOptions.color == IconReplacement.WintryColor -> {
-                changeMode(IconOptionsMode.Wintry)
-                initSelectedColor(IconReplacement.WintryColor)
+            is IconReplacement.CustomColor if prefilledOptions.color == IconReplacement.ShiggyColor -> {
+                changeMode(IconOptionsMode.Shiggy)
+                initSelectedColor(IconReplacement.ShiggyColor)
             }
 
             is IconReplacement.CustomColor if prefilledOptions.color == IconReplacement.AliucordColor -> {
@@ -104,7 +104,7 @@ class IconOptionsModel(
         return when (mode) {
             IconOptionsMode.Original -> IconReplacement.Original
             IconOptionsMode.OldDiscord -> IconReplacement.OldDiscord
-            IconOptionsMode.Wintry -> IconReplacement.CustomColor(IconReplacement.WintryColor)
+            IconOptionsMode.Shiggy -> IconReplacement.CustomColor(IconReplacement.ShiggyColor)
             IconOptionsMode.Aliucord -> IconReplacement.CustomColor(IconReplacement.AliucordColor)
             IconOptionsMode.CustomColor -> IconReplacement.CustomColor(color = selectedColor.toColor())
             IconOptionsMode.CustomImage -> IconReplacement.CustomImage(

@@ -12,7 +12,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.aliucord.manager.ui.screens.patchopts.PackageNameState
-import dev.wintry.manager.R
+import dev.shiggy.manager.R
 
 @Composable
 fun PackageNameStateLabel(

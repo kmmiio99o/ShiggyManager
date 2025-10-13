@@ -109,9 +109,9 @@ data class PatchOptions(
             val AliucordColor = Color(0xFF00C853)
 
             /**
-             * The default Wintry background color.
+             * The default Shiggy background color.
              */
-            val WintryColor = Color(0xFF133E87)
+            val ShiggyColor = Color(0xFF133E87)
 
             /**
              * The new Discord blurple used in icons.
@@ -127,10 +127,10 @@ data class PatchOptions(
 
     companion object {
         val Default = PatchOptions(
-            appName = "Wintry",
-            packageName = "dev.wintry.app",
+            appName = "Shiggy",
+            packageName = "dev.shiggy.app",
             debuggable = false,
-            iconReplacement = IconReplacement.CustomColor(IconReplacement.WintryColor),
+            iconReplacement = IconReplacement.CustomColor(IconReplacement.ShiggyColor),
             versionPreference = VersionPreference.Stable,
             customVersionCode = "",
         )

@@ -8,7 +8,7 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import com.aliucord.manager.ui.screens.about.AboutScreen
 import com.aliucord.manager.ui.screens.logs.LogsListScreen
 import com.aliucord.manager.ui.screens.settings.SettingsScreen
-import dev.wintry.manager.R
+import dev.shiggy.manager.R
 
 @Composable
 fun HomeAppBar() {

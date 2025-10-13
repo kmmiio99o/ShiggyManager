@@ -23,14 +23,13 @@ import cafe.adriel.voyager.koin.koinScreenModel
 import com.aliucord.manager.ui.components.*
 import com.aliucord.manager.ui.screens.about.components.LeadContributor
 import com.aliucord.manager.ui.util.paddings.*
-import dev.wintry.manager.R
+import dev.shiggy.manager.R
 import kotlinx.parcelize.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
 class AboutScreen : Screen, Parcelable {
-    @IgnoredOnParcel
-    override val key = "About"
+    @IgnoredOnParcel override val key = "About"
 
     @Composable
     override fun Content() {
@@ -43,99 +42,94 @@ class AboutScreen : Screen, Parcelable {
 @Composable
 fun AboutScreenContent(state: State<AboutScreenState>) {
     Scaffold(
-        topBar = {
-            TopAppBar(
-                title = { Text(stringResource(R.string.navigation_about_manager)) },
-                navigationIcon = { BackButton() },
-            )
-        }
+            topBar = {
+                TopAppBar(
+                        title = { Text(stringResource(R.string.navigation_about_manager)) },
+                        navigationIcon = { BackButton() },
+                )
+            }
     ) { paddingValues ->
         LazyColumn(
-            verticalArrangement = Arrangement.spacedBy(2.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            contentPadding = paddingValues
-                .exclude(PaddingValuesSides.Horizontal + PaddingValuesSides.Top)
-                .add(PaddingValues(vertical = 16.dp)),
-            modifier = Modifier
-                .padding(paddingValues.exclude(PaddingValuesSides.Bottom))
-                .padding(horizontal = 14.dp),
+                verticalArrangement = Arrangement.spacedBy(2.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                contentPadding =
+                        paddingValues
+                                .exclude(PaddingValuesSides.Horizontal + PaddingValuesSides.Top)
+                                .add(PaddingValues(vertical = 16.dp)),
+                modifier =
+                        Modifier.padding(paddingValues.exclude(PaddingValuesSides.Bottom))
+                                .padding(horizontal = 14.dp),
         ) {
             item(key = "MANAGER_CREDIT_DISCLAIMER_BANNER") {
                 Box(
-                    contentAlignment = Alignment.Center,
-                    modifier = Modifier
-                        .padding(bottom = 24.dp)
-                        .border(
-                            width = 2.dp,
-                            color = MaterialTheme.colorScheme.surfaceVariant,
-                            shape = MaterialTheme.shapes.medium
-                        )
-                        .clip(MaterialTheme.shapes.medium)
-                        .background(MaterialTheme.colorScheme.surfaceContainerHigh)
+                        contentAlignment = Alignment.Center,
+                        modifier =
+                                Modifier.padding(bottom = 24.dp)
+                                        .border(
+                                                width = 2.dp,
+                                                color = MaterialTheme.colorScheme.surfaceVariant,
+                                                shape = MaterialTheme.shapes.medium
+                                        )
+                                        .clip(MaterialTheme.shapes.medium)
+                                        .background(MaterialTheme.colorScheme.surfaceContainerHigh)
                 ) {
                     Row(
-                        horizontalArrangement = Arrangement.spacedBy(12.dp),
-                        verticalAlignment = Alignment.CenterVertically,
-                        modifier = Modifier
-                            .padding(horizontal = 20.dp, vertical = 14.dp)
+                            horizontalArrangement = Arrangement.spacedBy(12.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                            modifier = Modifier.padding(horizontal = 20.dp, vertical = 14.dp)
                     ) {
                         Text(
-                            text = stringResource(R.string.about_manager_credit_disclaimer_notice),
-                            style = MaterialTheme.typography.labelMedium,
+                                text =
+                                        stringResource(
+                                                R.string.about_manager_credit_disclaimer_notice
+                                        ),
+                                style = MaterialTheme.typography.labelMedium,
                         )
                     }
                 }
             }
 
-            item(key = "PROJECT_HEADER") {
-                ProjectHeader(aliucord = true)
-            }
+            item(key = "PROJECT_HEADER") { ProjectHeader(aliucord = true) }
 
             item(key = "HEADER_DIVIDER") {
                 TextDivider(
-                    text = stringResource(R.string.contributors_lead),
-                    modifier = Modifier.padding(top = 18.dp, bottom = 20.dp),
+                        text = stringResource(R.string.contributors_lead),
+                        modifier = Modifier.padding(top = 18.dp, bottom = 20.dp),
                 )
             }
 
             item(key = "MAIN_CONTRIBUTORS") {
                 Row(
-                    horizontalArrangement = Arrangement.SpaceEvenly,
-                    verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceEvenly,
+                        verticalAlignment = Alignment.CenterVertically,
+                        modifier = Modifier.fillMaxWidth(),
                 ) {
-                    LeadContributor("Vendicated", "the ven")
-                    LeadContributor("Juby210", "Fox")
-                    LeadContributor("rushii", "explod", "rushiiMachine")
+                    LeadContributor("C0C0B01", "Creator of Kettu")
+                    LeadContributor("kmmiio99o", "Creator of ShiggyCord")
+                    LeadContributor("pylixonly", "Creator of Bunny")
                 }
             }
 
             item(key = "CONTRIBUTORS_DIVIDER") {
                 TextDivider(
-                    text = stringResource(R.string.contributors),
-                    modifier = Modifier.padding(top = 16.dp, bottom = 6.dp)
+                        text = stringResource(R.string.contributors),
+                        modifier = Modifier.padding(top = 16.dp, bottom = 6.dp)
                 )
             }
 
             when (val state = state.value) {
-                AboutScreenState.Loading -> item(key = "CONTRIBUTIONS_LOADING") {
-                    Box(
-                        contentAlignment = Alignment.Center,
-                        content = { CircularProgressIndicator() },
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(vertical = 38.dp),
-                    )
-                }
-
-                AboutScreenState.Failure -> item(key = "LOAD_FAILURE") {
-                    LoadFailure(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .padding(vertical = 38.dp)
-                    )
-                }
-
+                AboutScreenState.Loading ->
+                        item(key = "CONTRIBUTIONS_LOADING") {
+                            Box(
+                                    contentAlignment = Alignment.Center,
+                                    content = { CircularProgressIndicator() },
+                                    modifier = Modifier.fillMaxWidth().padding(vertical = 38.dp),
+                            )
+                        }
+                AboutScreenState.Failure ->
+                        item(key = "LOAD_FAILURE") {
+                            LoadFailure(modifier = Modifier.fillMaxSize().padding(vertical = 38.dp))
+                        }
                 is AboutScreenState.Loaded -> {
                     items(state.contributors, key = { it.username }) { user ->
                         ContributorCommitsItem(user)
