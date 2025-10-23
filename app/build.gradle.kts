@@ -18,7 +18,7 @@ val gitHasLocalCommits = gitCurrentBranch?.let { providers.execIgnoreCode("git",
 val gitHasHasLocalChanges = providers.execIgnoreCode("git", "status", "-s").isNotEmpty()
 
 android {
-    namespace = "dev.shiggy.manager"
+    namespace = "dev.goon.manager"
     compileSdk = 36
 
     defaultConfig {
@@ -31,10 +31,10 @@ android {
             useSupportLibrary = true
         }
 
-        buildConfigField("String", "APPLICATION_NAME", "\"Shiggy Manager\"")
-        buildConfigField("String", "TAG", "\"ShiggyManager\"")
+        buildConfigField("String", "APPLICATION_NAME", "\"Goon Manager\"")
+        buildConfigField("String", "TAG", "\"GoonManager\"")
 
-        buildConfigField("String", "GITHUB_ORG", "\"ShiggyCord\"")
+        buildConfigField("String", "GITHUB_ORG", "\"GoonCord\"")
         buildConfigField("String", "SUPPORT_SERVER", "\"\"")
 
         buildConfigField("String", "BACKEND_URL", "\"https://aliucord.com/\"")
