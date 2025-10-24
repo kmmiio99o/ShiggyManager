@@ -43,181 +43,399 @@ object ManifestPatcher {
         val reader = AxmlReader(manifestBytes)
         val writer = AxmlWriter()
 
-        reader.accept(object : AxmlVisitor(writer) {
-            override fun ns(prefix: String?, uri: String?, ln: Int) {
-                val realUri = uri ?: ANDROID_NAMESPACE
-                super.ns(prefix, realUri, ln)
-            }
+        reader.accept(
+            object : AxmlVisitor(writer) {
+                override fun ns(prefix: String?, uri: String?, ln: Int) {
+                    val realUri = uri ?: ANDROID_NAMESPACE
+                    super.ns(prefix, realUri, ln)
+                }
 
-            override fun child(ns: String?, name: String?) =
-                object : ReplaceAttrsVisitor(
-                    super.child(ns, name),
-                    buildMap {
-                        packageName?.let { put(PACKAGE, it) }
-                        compileSdkVersion?.let { put(COMPILE_SDK_VERSION, it) }
-                        compileSdkVersionCodename?.let { put(COMPILE_SDK_VERSION_CODENAME, it) }
-                    }
-                ) {
-                    private var shouldAddExternalStoragePerm = false
-
-                    override fun child(ns: String?, name: String): NodeVisitor {
-                        val nv = super.child(ns, name)
-
-                        // Add MANAGE_EXTERNAL_STORAGE when necessary
-                        if (shouldAddExternalStoragePerm && addManageExternalStorage == true) {
-                            super
-                                .child(null, "uses-permission")
-                                .attr(ANDROID_NAMESPACE, "name", android.R.attr.name, TYPE_STRING, Manifest.permission.MANAGE_EXTERNAL_STORAGE)
-                            shouldAddExternalStoragePerm = false
-                        }
-
-                        return when (name) {
-                            "uses-permission" -> if (modifyPermissions != false) {
-                                object : NodeVisitor(nv) {
-                                    override fun attr(ns: String?, name: String?, resourceId: Int, type: Int, value: Any?) {
-                                        if (name != "maxSdkVersion") {
-                                            super.attr(ns, name, resourceId, type, value)
-                                        }
-
-                                        // Set the add external storage permission to be added after WRITE_EXTERNAL_STORAGE (which is after read)
-                                        if (name == "name" && value == Manifest.permission.READ_EXTERNAL_STORAGE) {
-                                            shouldAddExternalStoragePerm = true
-                                        }
-                                    }
+                override fun child(ns: String?, name: String?) =
+                    object :
+                        ReplaceAttrsVisitor(
+                            super.child(ns, name),
+                            buildMap {
+                                packageName?.let { put(PACKAGE, it) }
+                                compileSdkVersion?.let {
+                                    put(COMPILE_SDK_VERSION, it)
                                 }
-                            } else nv
-
-                            "uses-sdk" -> if (targetSdkVersion != null) {
-                                object : NodeVisitor(nv) {
-                                    override fun attr(ns: String?, name: String?, resourceId: Int, type: Int, value: Any?) {
-                                        if (name == "targetSdkVersion") {
-                                            super.attr(ns, name, resourceId, type, targetSdkVersion)
-                                        } else {
-                                            super.attr(ns, name, resourceId, type, value)
-                                        }
-                                    }
+                                compileSdkVersionCodename?.let {
+                                    put(COMPILE_SDK_VERSION_CODENAME, it)
                                 }
-                            } else nv
+                            }
+                        ) {
+                        private var shouldAddExternalStoragePerm = false
+                        private val shouldAddUsesForDeclaredPermissions = mutableListOf<String>()
 
-                            "permission" -> if (modifyPermissions != false && packageName != null) {
-                                object : NodeVisitor(nv) {
-                                    override fun attr(ns: String?, name: String, resourceId: Int, type: Int, value: Any?) {
-                                        super.attr(
-                                            ns, name, resourceId, type,
-                                            when (name) {
-                                                "name" -> (value as String).replace("com.discord", packageName)
-                                                else -> value
-                                            }
-                                        )
-                                    }
-                                }
-                            } else nv
+                        override fun child(ns: String?, name: String): NodeVisitor {
+                            val nv = super.child(ns, name)
 
-                            "application" -> object : ReplaceAttrsVisitor(
-                                nv,
-                                buildMap {
-                                    appName?.let { put(LABEL, it) }
-                                    debuggable?.let { put(DEBUGGABLE, it) }
-                                    requestLegacyExternalStorage?.let { put(REQUEST_LEGACY_EXTERNAL_STORAGE, it) }
-                                    vmSafeMode?.let { put(VM_SAFE_MODE, it) }
-                                    useEmbeddedDex?.let { put(USE_EMBEDDED_DEX, it) }
-                                    extractNativeLibs?.let { put(EXTRACT_NATIVE_LIBS, !it) } // Inverted since we set to false originally
-                                }
+                            // Add MANAGE_EXTERNAL_STORAGE when necessary
+                            if (shouldAddExternalStoragePerm &&
+                                addManageExternalStorage == true
                             ) {
-                                private var shouldAddDebuggable = debuggable ?: false
-                                private var shouldAddLegacyStorage = requestLegacyExternalStorage ?: false
-                                private var shouldAddUseEmbeddedDex = useEmbeddedDex ?: false
-                                private var shouldAddExtractNativeLibs = extractNativeLibs ?: false
-                                private var shouldAddMetadata = addManagerMetadata ?: false
+                                super.child(null, "uses-permission")
+                                    .attr(
+                                        ANDROID_NAMESPACE,
+                                        "name",
+                                        android.R.attr.name,
+                                        TYPE_STRING,
+                                        Manifest.permission.MANAGE_EXTERNAL_STORAGE
+                                    )
+                                shouldAddExternalStoragePerm = false
+                            }
 
-                                override fun attr(ns: String?, name: String, resourceId: Int, type: Int, value: Any?) {
-                                    if (name == NETWORK_SECURITY_CONFIG) return
-                                    if (name == REQUEST_LEGACY_EXTERNAL_STORAGE) shouldAddLegacyStorage = false
-                                    if (name == USE_EMBEDDED_DEX) shouldAddUseEmbeddedDex = false
-                                    if (name == EXTRACT_NATIVE_LIBS) shouldAddExtractNativeLibs = false
-                                    if (name == DEBUGGABLE) shouldAddDebuggable = false
-                                    super.attr(ns, name, resourceId, type, value)
+                            // If any declared permissions were detected that should also be
+                            // exposed as <uses-permission/>, add them here (keeps declaration + usage).
+                            if (shouldAddUsesForDeclaredPermissions.isNotEmpty()) {
+                                for (perm in shouldAddUsesForDeclaredPermissions) {
+                                    super.child(null, "uses-permission")
+                                        .attr(
+                                            ANDROID_NAMESPACE,
+                                            "name",
+                                            android.R.attr.name,
+                                            TYPE_STRING,
+                                            perm
+                                        )
                                 }
+                                shouldAddUsesForDeclaredPermissions.clear()
+                            }
 
-                                override fun child(ns: String?, name: String): NodeVisitor {
-                                    val visitor = super.child(ns, name)
-
-                                    if (shouldAddMetadata && addManagerMetadata == true) {
-                                        shouldAddMetadata = false
-                                        super.child(ANDROID_NAMESPACE, "meta-data").apply {
-                                            attr(
-                                                ANDROID_NAMESPACE,
-                                                "name",
-                                                android.R.attr.name,
-                                                TYPE_STRING,
-                                                "isShiggy" /* originally "isAliucord" */
-                                            )
-                                            attr(ANDROID_NAMESPACE, "value", android.R.attr.value, TYPE_INT_BOOLEAN, 1)
-                                        }
-                                    }
-
-                                    return when (name) {
-                                        "activity" -> if (modifyActivities != false && appName != null) {
-                                            ReplaceAttrsVisitor(visitor, mapOf("label" to appName))
-                                        } else visitor
-
-                                        "provider" -> if (modifyProviders != false && packageName != null) {
-                                            object : NodeVisitor(visitor) {
-                                                override fun attr(ns: String?, name: String, resourceId: Int, type: Int, value: Any?) {
+                            return when (name) {
+                                "uses-permission" ->
+                                    if (modifyPermissions != false) {
+                                        object : NodeVisitor(nv) {
+                                            override fun attr(
+                                                ns: String?,
+                                                name: String?,
+                                                resourceId: Int,
+                                                type: Int,
+                                                value: Any?
+                                            ) {
+                                                if (name != "maxSdkVersion") {
                                                     super.attr(
-                                                        ns, name, resourceId, type,
-                                                        if (name == "authorities") {
-                                                            (value as String).replace("com.discord", packageName)
-                                                        } else {
-                                                            value
-                                                        }
+                                                        ns,
+                                                        name,
+                                                        resourceId,
+                                                        type,
+                                                        value
+                                                    )
+                                                }
+
+                                                // Set the add external storage
+                                                // permission to be added after
+                                                // WRITE_EXTERNAL_STORAGE (which is
+                                                // after read)
+                                                if (name == "name" &&
+                                                    value ==
+                                                    Manifest.permission
+                                                        .READ_EXTERNAL_STORAGE
+                                                ) {
+                                                    shouldAddExternalStoragePerm = true
+                                                }
+                                            }
+                                        }
+                                    } else nv
+
+                                "uses-sdk" ->
+                                    if (targetSdkVersion != null) {
+                                        object : NodeVisitor(nv) {
+                                            override fun attr(
+                                                ns: String?,
+                                                name: String?,
+                                                resourceId: Int,
+                                                type: Int,
+                                                value: Any?
+                                            ) {
+                                                if (name == "targetSdkVersion") {
+                                                    super.attr(
+                                                        ns,
+                                                        name,
+                                                        resourceId,
+                                                        type,
+                                                        targetSdkVersion
+                                                    )
+                                                } else {
+                                                    super.attr(
+                                                        ns,
+                                                        name,
+                                                        resourceId,
+                                                        type,
+                                                        value
                                                     )
                                                 }
                                             }
-                                        } else visitor
+                                        }
+                                    } else nv
 
-                                        else -> visitor
-                                    }
-                                }
+                                "permission" ->
+                                    if (modifyPermissions != false &&
+                                        packageName != null
+                                    ) {
+                                        object : NodeVisitor(nv) {
+                                            override fun attr(
+                                                ns: String?,
+                                                name: String,
+                                                resourceId: Int,
+                                                type: Int,
+                                                value: Any?
+                                            ) {
+                                                val newVal = when (name) {
+                                                    "name" ->
+                                                        (value as String)
+                                                            .replace(
+                                                                "com.discord",
+                                                                packageName
+                                                            )
 
-                                override fun end() {
-                                    if (shouldAddLegacyStorage && Build.VERSION.SDK_INT >= 29 && requestLegacyExternalStorage == true) {
-                                        super.attr(
-                                            ANDROID_NAMESPACE,
-                                            REQUEST_LEGACY_EXTERNAL_STORAGE,
-                                            android.R.attr.requestLegacyExternalStorage,
-                                            TYPE_INT_BOOLEAN,
-                                            1
-                                        )
-                                    }
-                                    if (shouldAddDebuggable && debuggable == true) {
-                                        super.attr(ANDROID_NAMESPACE, DEBUGGABLE, android.R.attr.debuggable, TYPE_INT_BOOLEAN, 1)
+                                                    else -> value
+                                                }
+
+                                                super.attr(
+                                                    ns,
+                                                    name,
+                                                    resourceId,
+                                                    type,
+                                                    newVal
+                                                )
+
+                                                // If this permission looks like a runtime/receiver permission
+                                                // or is a custom declared permission, also add a corresponding
+                                                // <uses-permission/> entry so other apps / the system can request it.
+                                                if (name == "name" && newVal is String) {
+                                                    if (newVal.endsWith("_PERMISSION") || newVal.contains("DYNAMIC_RECEIVER")) {
+                                                        shouldAddUsesForDeclaredPermissions.add(newVal)
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    } else nv
+
+                                "application" ->
+                                    object :
+                                        ReplaceAttrsVisitor(
+                                            nv,
+                                            buildMap {
+                                                appName?.let { put(LABEL, it) }
+                                                debuggable?.let {
+                                                    put(DEBUGGABLE, it)
+                                                }
+                                                requestLegacyExternalStorage
+                                                    ?.let {
+                                                        put(
+                                                            REQUEST_LEGACY_EXTERNAL_STORAGE,
+                                                            it
+                                                        )
+                                                    }
+                                                vmSafeMode?.let {
+                                                    put(VM_SAFE_MODE, it)
+                                                }
+                                                useEmbeddedDex?.let {
+                                                    put(USE_EMBEDDED_DEX, it)
+                                                }
+                                                extractNativeLibs?.let {
+                                                    put(
+                                                        EXTRACT_NATIVE_LIBS,
+                                                        !it
+                                                    )
+                                                } // Inverted since we set to
+                                                // false originally
+                                            }
+                                        ) {
+                                        private var shouldAddDebuggable =
+                                            debuggable ?: false
+                                        private var shouldAddLegacyStorage =
+                                            requestLegacyExternalStorage ?: false
+                                        private var shouldAddUseEmbeddedDex =
+                                            useEmbeddedDex ?: false
+                                        private var shouldAddExtractNativeLibs =
+                                            extractNativeLibs ?: false
+                                        private var shouldAddMetadata =
+                                            addManagerMetadata ?: false
+
+                                        override fun attr(
+                                            ns: String?,
+                                            name: String,
+                                            resourceId: Int,
+                                            type: Int,
+                                            value: Any?
+                                        ) {
+                                            if (name == NETWORK_SECURITY_CONFIG) return
+                                            if (name == REQUEST_LEGACY_EXTERNAL_STORAGE)
+                                                shouldAddLegacyStorage = false
+                                            if (name == USE_EMBEDDED_DEX)
+                                                shouldAddUseEmbeddedDex = false
+                                            if (name == EXTRACT_NATIVE_LIBS)
+                                                shouldAddExtractNativeLibs = false
+                                            if (name == DEBUGGABLE)
+                                                shouldAddDebuggable = false
+                                            super.attr(
+                                                ns,
+                                                name,
+                                                resourceId,
+                                                type,
+                                                value
+                                            )
+                                        }
+
+                                        override fun child(
+                                            ns: String?,
+                                            name: String
+                                        ): NodeVisitor {
+                                            val visitor = super.child(ns, name)
+
+                                            if (shouldAddMetadata &&
+                                                addManagerMetadata == true
+                                            ) {
+                                                shouldAddMetadata = false
+                                                super.child(
+                                                    ANDROID_NAMESPACE,
+                                                    "meta-data"
+                                                )
+                                                    .apply {
+                                                        attr(
+                                                            ANDROID_NAMESPACE,
+                                                            "name",
+                                                            android.R.attr.name,
+                                                            TYPE_STRING,
+                                                            "isShiggy" /* originally "isAliucord" */
+                                                        )
+                                                        attr(
+                                                            ANDROID_NAMESPACE,
+                                                            "value",
+                                                            android.R
+                                                                .attr
+                                                                .value,
+                                                            TYPE_INT_BOOLEAN,
+                                                            1
+                                                        )
+                                                    }
+                                            }
+
+                                            return when (name) {
+                                                "activity" ->
+                                                    if (modifyActivities != false &&
+                                                        appName != null
+                                                    ) {
+                                                        ReplaceAttrsVisitor(
+                                                            visitor,
+                                                            mapOf(
+                                                                "label" to
+                                                                        appName
+                                                            )
+                                                        )
+                                                    } else visitor
+
+                                                "provider" ->
+                                                    if (modifyProviders != false &&
+                                                        packageName !=
+                                                        null
+                                                    ) {
+                                                        object :
+                                                            NodeVisitor(
+                                                                visitor
+                                                            ) {
+                                                            override fun attr(
+                                                                ns: String?,
+                                                                name: String,
+                                                                resourceId: Int,
+                                                                type: Int,
+                                                                value: Any?
+                                                            ) {
+                                                                super.attr(
+                                                                    ns,
+                                                                    name,
+                                                                    resourceId,
+                                                                    type,
+                                                                    if (name ==
+                                                                        "authorities"
+                                                                    ) {
+                                                                        (value as
+                                                                                String)
+                                                                            .replace(
+                                                                                "com.discord",
+                                                                                packageName
+                                                                            )
+                                                                    } else {
+                                                                        value
+                                                                    }
+                                                                )
+                                                            }
+                                                        }
+                                                    } else visitor
+
+                                                else -> visitor
+                                            }
+                                        }
+
+                                        override fun end() {
+                                            if (shouldAddLegacyStorage &&
+                                                Build.VERSION.SDK_INT >=
+                                                29 &&
+                                                requestLegacyExternalStorage ==
+                                                true
+                                            ) {
+                                                super.attr(
+                                                    ANDROID_NAMESPACE,
+                                                    REQUEST_LEGACY_EXTERNAL_STORAGE,
+                                                    android.R
+                                                        .attr
+                                                        .requestLegacyExternalStorage,
+                                                    TYPE_INT_BOOLEAN,
+                                                    1
+                                                )
+                                            }
+                                            if (shouldAddDebuggable &&
+                                                debuggable == true
+                                            ) {
+                                                super.attr(
+                                                    ANDROID_NAMESPACE,
+                                                    DEBUGGABLE,
+                                                    android.R.attr.debuggable,
+                                                    TYPE_INT_BOOLEAN,
+                                                    1
+                                                )
+                                            }
+
+                                            // Disable AOT (Necessary for AOSP Android
+                                            // 15)
+                                            if (Build.VERSION.SDK_INT >= 29 &&
+                                                shouldAddUseEmbeddedDex &&
+                                                useEmbeddedDex == true
+                                            ) {
+                                                super.attr(
+                                                    ANDROID_NAMESPACE,
+                                                    USE_EMBEDDED_DEX,
+                                                    android.R.attr.useEmbeddedDex,
+                                                    TYPE_INT_BOOLEAN,
+                                                    1
+                                                )
+                                            }
+
+                                            if (shouldAddExtractNativeLibs &&
+                                                extractNativeLibs == false
+                                            ) {
+                                                super.attr(
+                                                    ANDROID_NAMESPACE,
+                                                    EXTRACT_NATIVE_LIBS,
+                                                    android.R
+                                                        .attr
+                                                        .extractNativeLibs,
+                                                    TYPE_INT_BOOLEAN,
+                                                    0
+                                                )
+                                            }
+
+                                            super.end()
+                                        }
                                     }
 
-                                    // Disable AOT (Necessary for AOSP Android 15)
-                                    if (Build.VERSION.SDK_INT >= 29 && shouldAddUseEmbeddedDex && useEmbeddedDex == true) {
-                                        super.attr(ANDROID_NAMESPACE, USE_EMBEDDED_DEX, android.R.attr.useEmbeddedDex, TYPE_INT_BOOLEAN, 1)
-                                    }
-
-                                    if (shouldAddExtractNativeLibs && extractNativeLibs == false) {
-                                        super.attr(
-                                            ANDROID_NAMESPACE,
-                                            EXTRACT_NATIVE_LIBS,
-                                            android.R.attr.extractNativeLibs,
-                                            TYPE_INT_BOOLEAN,
-                                            0
-                                        )
-                                    }
-
-                                    super.end()
-                                }
+                                else -> nv
                             }
-
-                            else -> nv
                         }
                     }
-                }
-        })
+            }
+        )
 
         return writer.toByteArray()
     }
@@ -230,7 +448,13 @@ object ManifestPatcher {
             val replace = attrs.containsKey(name)
             val newValue = attrs[name]
 
-            super.attr(ns, name, resourceId, if (newValue is String) TYPE_STRING else type, if (replace) newValue else value)
+            super.attr(
+                ns,
+                name,
+                resourceId,
+                if (newValue is String) TYPE_STRING else type,
+                if (replace) newValue else value
+            )
         }
     }
 }
