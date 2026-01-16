@@ -42,6 +42,7 @@ class MainActivity : ComponentActivity() {
             ManagerTheme(
                 theme = preferences.theme,
                 dynamicColor = preferences.dynamicColor,
+                amoled = preferences.amoled,
             ) {
                 if (BuildConfig.RELEASE) {
                     UpdaterDialog()

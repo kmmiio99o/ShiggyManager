@@ -8,6 +8,7 @@ import com.aliucord.manager.ui.theme.Theme
 @Stable
 class PreferencesManager(preferences: SharedPreferences) : BasePreferenceManager(preferences) {
     var theme by enumPreference("theme", Theme.System)
+    var amoled by booleanPreference("amoled", false)
     var dynamicColor by booleanPreference("dynamic_color", true)
     var devMode by booleanPreference("dev_mode", false)
     var installer by enumPreference<InstallerSetting>("installer", InstallerSetting.PM)

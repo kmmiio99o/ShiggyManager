@@ -51,8 +51,12 @@
   <string name="settings_header_info">Info</string>
   <string name="setting_theme">Theme</string>
   <string name="setting_theme_desc">The theme to apply to this app</string>
+  <string name="setting_amoled">Amoled mode</string>
+  <string name="setting_amoled_desc">Force true-black backgrounds for AMOLED displays</string>
   <string name="setting_dynamic_color">Dynamic color</string>
-  <string name="setting_dynamic_color_desc">Enables Material You theming on Android 12+</string>
+  <string
+    name="setting_dynamic_color_desc"
+  >Enables Material You theming on Android 12+; dynamic colors will also be applied to the Amoled theme when enabled</string>
   <string name="setting_installer">Installer</string>
   <string name="setting_installer_desc">The method to use for installing Shiggy</string>
   <string name="setting_developer_options">Developer options</string>
@@ -72,6 +76,7 @@
   <string name="theme_system">System</string>
   <string name="theme_dark">Dark</string>
   <string name="theme_light">Light</string>
+  <string name="theme_amoled">Amoled</string>
 
   <string name="navigation_back">Back</string>
   <string name="navigation_about">About</string>
@@ -84,7 +89,7 @@
   <string name="lead_role_kettu">Kettu - Creator</string>
   <string name="lead_role_shiggycord">ShiggyCord - Creator</string>
   <string name="lead_role_bunny">Bunny - Creator</string>
-  <string name="role_creator_vendetta">Creator of Vendetta</string>
+  <string name="role_creator_vendetta">Vendetta - Creator</string>
   <string name="role_original_manager_creator">Original Manager Creator</string>
 
   <string name="network_load_fail">Failed to load</string>

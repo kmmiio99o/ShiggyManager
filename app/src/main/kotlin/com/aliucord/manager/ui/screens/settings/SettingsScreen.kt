@@ -98,6 +98,14 @@ class SettingsScreen : Screen, Parcelable {
                 }
 
 
+                SettingsSwitch(
+                    label = stringResource(R.string.setting_amoled),
+                    secondaryLabel = stringResource(R.string.setting_amoled_desc),
+                    pref = preferences.amoled,
+                    icon = { Icon(painterResource(R.drawable.ic_night), null) },
+                    onPrefChange = { preferences.amoled = it },
+                )
+
                 // Material You theming on Android 12+
                 if (Build.VERSION.SDK_INT >= 31) {
                     SettingsSwitch(

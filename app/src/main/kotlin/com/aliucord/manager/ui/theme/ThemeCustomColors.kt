@@ -19,6 +19,10 @@ data class CustomColors(
     val onWarning: Color,
     val warningContainer: Color,
     val onWarningContainer: Color,
+    val instanceCardBackground: Color,
+    val instanceCardContent: Color,
+    val instanceCardButtonContainer: Color,
+    val instanceCardButtonContent: Color,
 )
 
 private val YellowAlt1 = Color(0xFFE9C414)
@@ -32,6 +36,10 @@ val DarkCustomColors = CustomColors(
     onWarning = DarkBrown,
     warningContainer = DarkBronze,
     onWarningContainer = Shandy,
+    instanceCardBackground = Color(0xFF0E0E0E),
+    instanceCardContent = Color(0xFFFFFFFF),
+    instanceCardButtonContainer = Color(0xFFF2F2F2),
+    instanceCardButtonContent = Color(0xFF000000),
 )
 
 val LightCustomColors = CustomColors(
@@ -39,4 +47,8 @@ val LightCustomColors = CustomColors(
     onWarning = Color.White,
     warningContainer = Shandy,
     onWarningContainer = DarkerBrown,
+    instanceCardBackground = Color(0xFFFFFFFF),
+    instanceCardContent = Color(0xFF000000),
+    instanceCardButtonContainer = Color(0xFFFAFAFA),
+    instanceCardButtonContent = Color(0xFF000000),
 )
