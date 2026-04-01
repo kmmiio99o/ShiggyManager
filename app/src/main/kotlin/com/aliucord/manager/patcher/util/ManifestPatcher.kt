@@ -252,6 +252,8 @@ object ManifestPatcher {
                                             extractNativeLibs ?: false
                                         private var shouldAddMetadata =
                                             addManagerMetadata ?: false
+                                        private var shouldAddCleartext = true
+
 
                                         override fun attr(
                                             ns: String?,
@@ -269,6 +271,12 @@ object ManifestPatcher {
                                                 shouldAddExtractNativeLibs = false
                                             if (name == DEBUGGABLE)
                                                 shouldAddDebuggable = false
+                                            if (name == "usesCleartextTraffic") {
+                                                shouldAddCleartext = false
+                                                super.attr(ns, name, 0x010104ec, TYPE_INT_BOOLEAN, 1)
+                                                return
+                                            }
+
                                             super.attr(
                                                 ns,
                                                 name,
@@ -425,7 +433,15 @@ object ManifestPatcher {
                                                     0
                                                 )
                                             }
-
+                                            if (shouldAddCleartext) {
+                                                super.attr(
+                                                    ANDROID_NAMESPACE,
+                                                    "usesCleartextTraffic",
+                                                    0x010104ec,
+                                                    TYPE_INT_BOOLEAN,
+                                                    1
+                                                )
+                                            }
                                             super.end()
                                         }
                                     }
