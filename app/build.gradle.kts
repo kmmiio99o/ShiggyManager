@@ -20,13 +20,13 @@ val gitHasHasLocalChanges = providers.execIgnoreCode("git", "status", "-s").isNo
 
 android {
     namespace = "dev.shiggy.manager"
-    compileSdk = 36
+    compileSdk = 37
 
     defaultConfig {
         minSdk = 28
-        targetSdk = 36
-        versionCode = 10_11_01
-        versionName = "1.1.1"
+        targetSdk = 37
+        versionCode = 10_12_00
+        versionName = "1.1.2"
         vectorDrawables {
             useSupportLibrary = true
         }
