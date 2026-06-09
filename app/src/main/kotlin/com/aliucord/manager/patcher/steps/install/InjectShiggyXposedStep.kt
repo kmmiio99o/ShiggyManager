@@ -13,6 +13,7 @@ import org.lsposed.lspatch.share.LSPConfig
 import org.lsposed.patch.LSPatch
 import org.lsposed.patch.util.Logger
 import java.io.File
+import java.util.*
 
 class InjectShiggyXposedStep : Step() {
     override val group: StepGroup = StepGroup.Install
@@ -82,7 +83,15 @@ class InjectShiggyXposedStep : Step() {
             //     FilenameUtils.getBaseName(apkFileName),
             //     LSPConfig.instance.VERSION_CODE)
             // )
-            val patchedApkName = "${baseName}-${LSPConfig.instance.VERSION_CODE}-lspatched.apk"
+            // Note: LSPatch uses Locale.getDefault() which can produce locale-specific numerals
+            // (e.g., Arabic numerals on Arabic locales). We must use Locale.US to ensure
+            // consistent filename matching regardless of device locale.
+            val patchedApkName = String.format(
+                Locale.US,
+                "%s-%d-lspatched.apk",
+                baseName,
+                LSPConfig.instance.VERSION_CODE
+            )
             val patchedApk = File(tempDir, patchedApkName)
 
             if (patchedApk.exists()) {
