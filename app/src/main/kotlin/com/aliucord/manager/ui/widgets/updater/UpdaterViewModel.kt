@@ -137,6 +137,11 @@ class UpdaterViewModel(
     private suspend fun fetchInfo() {
         Log.d(BuildConfig.TAG, "Checking for updates...")
 
+        // Reset update state so a new URL/check doesn't keep stale results.
+        targetVersion = null
+        targetApkUrl = null
+        showDialog = false
+
         val currentVersion = SemVer.parseOrNull(BuildConfig.VERSION_NAME)
             ?: throw Error("Failed to parse current app version")
 
