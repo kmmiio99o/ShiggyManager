@@ -74,6 +74,11 @@ sealed interface DiscordVersion : Comparable<DiscordVersion>, Parcelable {
             }
 
             val versionCode = version.toInt()
+            // Block 351011 and newer versions.
+            if (versionCode >= 351011) {
+                return Invalid
+            }
+
             val type = parseVersionType(versionCode)
 
             return Existing(
